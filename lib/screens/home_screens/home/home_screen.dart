@@ -8,13 +8,10 @@ import 'package:sfuverce_app/screens/home_screens/home/widgets_home/promo_card.d
 import 'package:sfuverce_app/screens/home_screens/home/widgets_home/section.dart';
 import 'package:sfuverce_app/widgets/app_bottom_navigation.dart';
 
-class HomeScreen extends StatefulWidget {
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key key}) : super(key: key);
 
-class _HomeScreenState extends State<HomeScreen> {
-  onCategorySelected(category) {
+  onCategorySelected(BuildContext context, category) {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -25,51 +22,48 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: AppBottomNavigation(),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Header(),
-              Section(
-                'Categories',
-                Fake.categories.map((c) {
-                  return CategoryCard(
-                    title: c.title,
-                    iconPath: c.iconPath,
-                    onTap: () {
-                      onCategorySelected(c);
-                    },
-                  );
-                }).toList(),
-              ),
-              Section(
-                'Today\'s Promo',
-                Fake.promotions.map((p) {
-                  return PromoCard(
-                    title: p.title,
-                    subtitle: p.subtitle,
-                    tag: p.tag,
-                    caption: p.caption,
-                    imagePath: p.imagePath,
-                    backgroundImagePath: p.backgroundImagePath,
-                  );
-                }).toList(),
-              ),
-              Section(
-                  'Trending Furniture',
-                  Fake.trending
-                      .map((imagePath) => ImageCard(imagePath))
-                      .toList()),
-              Section(
-                  'Featured Furniture',
-                  Fake.featured
-                      .map((imagePath) => ImageCard(imagePath))
-                      .toList()),
-            ],
-          ),
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Header(),
+            Section(
+              'Categories',
+              Fake.categories.map((c) {
+                return CategoryCard(
+                  title: c.title,
+                  iconPath: c.iconPath,
+                  onTap: () {
+                    onCategorySelected(context, c);
+                  },
+                );
+              }).toList(),
+            ),
+            Section(
+              'Today\'s Promo',
+              Fake.promotions.map((p) {
+                return PromoCard(
+                  title: p.title,
+                  subtitle: p.subtitle,
+                  tag: p.tag,
+                  caption: p.caption,
+                  imagePath: p.imagePath,
+                  backgroundImagePath: p.backgroundImagePath,
+                );
+              }).toList(),
+            ),
+            Section(
+                'Trending Furniture',
+                Fake.trending
+                    .map((imagePath) => ImageCard(imagePath))
+                    .toList()),
+            Section(
+                'Featured Furniture',
+                Fake.featured
+                    .map((imagePath) => ImageCard(imagePath))
+                    .toList()),
+          ],
         ),
       ),
     );

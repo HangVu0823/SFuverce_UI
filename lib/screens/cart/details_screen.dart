@@ -18,7 +18,7 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: AppBottomNavigation(),
+      // bottomNavigationBar: AppBottomNavigation(),
       body: ListView(
         children: [
           Column(

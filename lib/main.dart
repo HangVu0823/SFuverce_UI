@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sfuverce_app/constants/colors.dart';
 import 'package:sfuverce_app/screens/home_screens/home/home_screen.dart';
+import 'package:sfuverce_app/widgets/app_bottom_navigation.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         splashColor: Colors.transparent,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomeScreen(),
+      home: PageNavigation(),
     );
   }
 }

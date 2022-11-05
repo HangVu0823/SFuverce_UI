@@ -13,7 +13,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: AppBottomNavigation(),
+      // bottomNavigationBar: AppBottomNavigation(),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: CustomScrollView(

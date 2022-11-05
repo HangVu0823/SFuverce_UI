@@ -225,7 +225,7 @@ class _CartScreenState extends State<CartScreen> {
     int totalPrice = productPrice + 20;
 
     return Scaffold(
-      bottomNavigationBar: AppBottomNavigation(),
+      // bottomNavigationBar: AppBottomNavigation(),
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: IconButton(
