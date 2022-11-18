@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sfuverce_app/screens/delivery/trackorder.dart';
+import 'package:sfuverce_app/screens/user_profile/setting/setting.dart';
 
 class StatsScreen extends StatefulWidget {
   _StatsScreenState createState() => _StatsScreenState();
@@ -88,13 +89,19 @@ class _StatsScreenState extends State<StatsScreen> {
                             width: MediaQuery.of(context).size.width - 250.0,
                           ),
                           IconButton(
-                            icon: Icon(
-                              Icons.settings,
-                              color: Colors.white,
-                              size: 30.0,
-                            ),
-                            onPressed: () => {},
-                          ),
+                              icon: Icon(
+                                Icons.settings,
+                                color: Colors.white,
+                                size: 30.0,
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            SettingsOnePage()));
+                              }),
                         ],
                       ),
                       SizedBox(
@@ -197,17 +204,15 @@ class _StatsScreenState extends State<StatsScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  // GestureDetector( <Widget>customCards(
-                  //     'To be received', '8', 'assets/images/user/trucks.png'),
-                  // GestureDetector(
-                  //   onTap: () => TrackOrder(),
-                  // ),),
                   InkWell(
                     child: customCards(
                         'To be received', '8', 'assets/images/user/trucks.png'),
                     onTap: () {
                       Navigator.pop(context);
-                      Navigator.push(context, MaterialPageRoute(builder: (context) =>TrackOrder() ));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TrackOrder()));
                     },
                   ),
                   // GestureDetector(
