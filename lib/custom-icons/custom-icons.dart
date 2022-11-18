@@ -1,5 +1,3 @@
-// ignore_for_file: file_names
-
 import 'package:flutter/widgets.dart';
 
 class CustomIcons {
@@ -28,4 +26,7 @@ class CustomIcons {
   // ignore: constant_identifier_names
   static const IconData view_in_ar =
       IconData(0xe6b4, fontFamily: 'MaterialIcons');
+
+  static const IconData more_vert =
+      IconData(0xe404, fontFamily: 'MaterialIcons');
 }

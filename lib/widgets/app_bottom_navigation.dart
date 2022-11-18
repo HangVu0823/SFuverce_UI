@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sfuverce_app/constants/colors.dart';
-import 'package:sfuverce_app/screens/user_profile/profile_screen.dart';
+import 'package:sfuverce_app/screens/chat/chat_admin/chat_admin.dart';
+import 'package:sfuverce_app/screens/delivery/trackorder.dart';
+import 'package:sfuverce_app/screens/user_profile/user.dart';
 
 import '../screens/home_screens/home/home_screen.dart';
 
@@ -110,9 +112,19 @@ class _PageNavigationState extends State<PageNavigation> {
     });
     Widget res = null;
     switch (_selectedIndex) {
+      case 1:
+        {
+          res = TrackOrder();
+          break;
+        }
+      case 2:
+        {
+          res = ChatAdminScreen();
+          break;
+        }
       case 4:
         {
-          res = ProfileScreen();
+          res = StatsScreen();
           break;
         }
       default:

@@ -4,7 +4,6 @@ import 'package:sfuverce_app/constants/colors.dart';
 import 'package:sfuverce_app/models/item.dart';
 import 'package:sfuverce_app/screens/cart/details_screen.dart';
 
-
 class FurnitureGridItem extends StatelessWidget {
   final Item item;
   final EdgeInsets margin;

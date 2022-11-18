@@ -18,7 +18,7 @@ class CartScreen extends StatefulWidget {
 //     color: Colors.red,
 //     child: Icon(Icons.delete,color: Colors.white,),
 //     );
-  
+
 // }
 
 class _CartScreenState extends State<CartScreen> {
@@ -49,8 +49,7 @@ class _CartScreenState extends State<CartScreen> {
               width: 25.0,
               height: 100.0,
               decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.circular(20.0)),
+                  color: Colors.red, borderRadius: BorderRadius.circular(20.0)),
               child: Icon(
                 Icons.delete,
                 color: Colors.white,
@@ -95,7 +94,6 @@ class _CartScreenState extends State<CartScreen> {
                         width: 200.0,
                         image: AssetImage(cart.chair.imageUrl),
                         fit: BoxFit.fitHeight,
-                        
                       ),
                     ),
                   ),
@@ -246,14 +244,14 @@ class _CartScreenState extends State<CartScreen> {
         ),
         centerTitle: true,
         elevation: 0.0,
-        actions: [
-          IconButton(
-            icon: Icon(CustomIcons.short_text),
-            onPressed: () {},
-            color: Colors.black,
-            iconSize: 30.0,
-          )
-        ],
+        // actions: [
+        //   IconButton(
+        //     icon: Icon(CustomIcons.short_text),
+        //     onPressed: () {},
+        //     color: Colors.black,
+        //     iconSize: 30.0,
+        //   )
+        // ],
       ),
       body: ListView.builder(
         physics: BouncingScrollPhysics(),

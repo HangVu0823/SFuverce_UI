@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:sfuverce_app/data/fake.dart';
 import 'package:sfuverce_app/screens/cart/cart_screen.dart';
-import 'package:sfuverce_app/widgets/app_bottom_navigation.dart';
 import 'package:sfuverce_app/models/item.dart';
 import 'package:sfuverce_app/constants/colors.dart';
+import 'package:sfuverce_app/screens/chat/chat_products/chat_detailsScreen.dart';
+import 'package:sfuverce_app/screens/reviews/reviews.dart';
+import 'package:sfuverce_app/screens/reviews/reviewsUI.dart';
 
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({
@@ -17,8 +20,8 @@ class DetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isMore = false;
     return Scaffold(
-      // bottomNavigationBar: AppBottomNavigation(),
       body: ListView(
         children: [
           Column(
@@ -190,6 +193,84 @@ class DetailsScreen extends StatelessWidget {
                 height: 40.0,
               ),
               Row(
+                children: [
+                  Container(
+                    height: 30,
+                    width: MediaQuery.of(context).size.width - 130,
+                    margin: EdgeInsets.only(left: 19),
+                    child: Text(
+                      "Reviews",
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        color: Color.fromRGBO(0, 0, 0, 1),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(left: 10, right: 5),
+                    child: InkWell(
+                      child: Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          Text(
+                            'View all',
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              height: 1,
+                              color: primaryColor,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(right: 10.0),
+                            child: Icon(
+                              Icons.arrow_forward,
+                              color: primaryColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => Reviews(),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              ListView.separated(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                padding: EdgeInsets.only(bottom: 8.0, top: 8.0),
+                itemCount: 3,
+                itemBuilder: (context, index) {
+                  return ReviewsUI(
+                    image: Fake.review[index].image,
+                    name: Fake.review[index].name,
+                    date: Fake.review[index].date,
+                    comments: Fake.review[index].comments,
+                    rating: Fake.review[index].rating,
+                    onPressed: () => print("More Action $index"),
+                    onTap: () => () {
+                      isMore = !isMore;
+                    },
+                    isLess: isMore,
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return Divider(
+                    thickness: 2.0,
+                    color: kDarkColor,
+                  );
+                },
+              ),
+              SizedBox(
+                height: 40.0,
+              ),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
@@ -269,6 +350,37 @@ class DetailsScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  Container(
+                    height: 60.0,
+                    width: 80.0,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20.0),
+                        color: Theme.of(context).primaryColor,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black12,
+                            offset: Offset(0, 2),
+                            blurRadius: 20.0,
+                          )
+                        ]),
+                    child: Center(
+                      child: IconButton(
+                        icon: Icon(Icons.question_answer),
+                        iconSize: 25.0,
+                        color: Colors.white,
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => ChatDetailScreen(
+                              item: item,
+                              margin: margin,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+
                   //add cart
                   Container(
                       height: 60.0,
@@ -304,7 +416,7 @@ class DetailsScreen extends StatelessWidget {
 
                   Container(
                     height: 60.0,
-                    width: 180.0,
+                    width: 160.0,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20.0),
                         color: Theme.of(context).primaryColor,

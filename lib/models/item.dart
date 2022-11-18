@@ -11,6 +11,7 @@ class Item {
   int weight;
   final String color;
   Color backgorundColor;
+  
 
   Item({
     @required this.name,
