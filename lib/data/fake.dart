@@ -4,6 +4,7 @@ import 'package:sfuverce_app/models/item.dart';
 import 'package:sfuverce_app/models/models_home/promotion.dart';
 import 'package:sfuverce_app/models/models_order/track_order.dart';
 import 'package:sfuverce_app/models/models_review/ReviewModal.dart';
+import 'package:sfuverce_app/services/database_service.dart';
 
 class Fake {
   static int numberOfItemsInCart = 1;
@@ -44,86 +45,93 @@ class Fake {
     'assets/images/furniture/pexels-steve-johnson-923192.jpg'
   ];
 
-  static List<Item> furniture = [
-    Item(
-      name: 'Chair Dacey li - Black',
-      imagePath: 'assets/images/furniture/items/dacey.png',
-      originalPrice: 80,
-      rating: 4.5,
-      discountPercent: 30,
-      color: 'White',
-      description:
-          'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-      height: 32,
-      weight: 38,
-      backgorundColor: const Color.fromARGB(255, 255, 255, 255),
-    ),
-    Item(
-      name: 'Elly Sofa Patchwork',
-      imagePath: 'assets/images/furniture/items/elly.png',
-      originalPrice: 140,
-      rating: 4.4,
-      discountPercent: 30,
-      color: 'White',
-      description:
-          'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-      height: 32,
-      weight: 38,
-      backgorundColor: Color.fromARGB(255, 255, 255, 255),
-    ),
-    Item(
-      name: 'Dobson Table - White',
-      imagePath: 'assets/images/furniture/items/table 2.png',
-      originalPrice: 160,
-      rating: 4.3,
-      discountPercent: 25,
-      color: 'White',
-      description:
-          'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-      height: 32,
-      weight: 38,
-      backgorundColor: Color.fromARGB(255, 255, 255, 255),
-    ),
-    Item(
-      name: 'Nagano Table - Brown',
-      imagePath: 'assets/images/furniture/items/ezgif_com-crop.png',
-      originalPrice: 140,
-      rating: 4.3,
-      discountPercent: 20,
-      color: 'White',
-      description:
-          'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-      height: 32,
-      weight: 38,
-      backgorundColor: Color.fromARGB(255, 255, 255, 255),
-    ),
-    Item(
-      name: 'Chair Dacey li - White',
-      imagePath: 'assets/images/furniture/items/CHair 2.png',
-      originalPrice: 80,
-      rating: 4.3,
-      discountPercent: 20,
-      color: 'White',
-      description:
-          'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-      height: 32,
-      weight: 38,
-      backgorundColor: Color.fromARGB(255, 255, 255, 255),
-    ),
-    Item(
-      name: 'Chair Dacey li - Feather Grey',
-      imagePath: 'assets/images/furniture/items/chair3.png',
-      originalPrice: 80,
-      rating: 4.0,
-      discountPercent: 20,
-      color: 'White',
-      description:
-          'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-      height: 32,
-      weight: 38,
-      backgorundColor: Color.fromARGB(255, 255, 255, 255),
-    ),
-  ];
+  static List<Item> furniture;
+
+  void addDataFurniture() async {
+    print("hi2");
+    furniture = await DatabaseService().getItemFromFirestore();
+    
+  }
+  // static List<Item> furniture = [
+  //   Item(
+  //     name: 'Chair Dacey li - Black',
+  //     imagePath: 'assets/images/furniture/items/dacey.png',
+  //     originalPrice: 80,
+  //     rating: 4.5,
+  //     discountPercent: 30,
+  //     color: 'White',
+  //     description:
+  //         'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+  //     height: 32,
+  //     weight: 38,
+  //     //backgorundColor: const Color.fromARGB(255, 255, 255, 255),
+  //   ),
+  //   Item(
+  //     name: 'Elly Sofa Patchwork',
+  //     imagePath: 'assets/images/furniture/items/elly.png',
+  //     originalPrice: 140,
+  //     rating: 4.4,
+  //     discountPercent: 30,
+  //     color: 'White',
+  //     description:
+  //         'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+  //     height: 32,
+  //     weight: 38,
+  //     //backgorundColor: Color.fromARGB(255, 255, 255, 255),
+  //   ),
+  //   Item(
+  //     name: 'Dobson Table - White',
+  //     imagePath: 'assets/images/furniture/items/table 2.png',
+  //     originalPrice: 160,
+  //     rating: 4.3,
+  //     discountPercent: 25,
+  //     color: 'White',
+  //     description:
+  //         'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+  //     height: 32,
+  //     weight: 38,
+  //     //backgorundColor: Color.fromARGB(255, 255, 255, 255),
+  //   ),
+  //   Item(
+  //     name: 'Nagano Table - Brown',
+  //     imagePath: 'assets/images/furniture/items/ezgif_com-crop.png',
+  //     originalPrice: 140,
+  //     rating: 4.3,
+  //     discountPercent: 20,
+  //     color: 'White',
+  //     description:
+  //         'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+  //     height: 32,
+  //     weight: 38,
+  //     //backgorundColor: Color.fromARGB(255, 255, 255, 255),
+  //   ),
+  //   Item(
+  //     name: 'Chair Dacey li - White',
+  //     imagePath: 'assets/images/furniture/items/CHair 2.png',
+  //     originalPrice: 80,
+  //     rating: 4.3,
+  //     discountPercent: 20,
+  //     color: 'White',
+  //     description:
+  //         'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+  //     height: 32,
+  //     weight: 38,
+  //     //backgorundColor: Color.fromARGB(255, 255, 255, 255),
+  //   ),
+  //   Item(
+  //     name: 'Chair Dacey li - Feather Grey',
+  //     imagePath: 'assets/images/furniture/items/chair3.png',
+  //     originalPrice: 80,
+  //     rating: 4.0,
+  //     discountPercent: 20,
+  //     color: 'White',
+  //     description:
+  //         'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+  //     height: 32,
+  //     weight: 38,
+  //     //backgorundColor: Color.fromARGB(255, 255, 255, 255),
+  //   ),
+  // ];
 
   static List<TrackOrderModal> trackOrderList = [
     TrackOrderModal(

@@ -27,19 +27,19 @@ class SettingsOnePage extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
                 margin: const EdgeInsets.all(8.0),
-                color: Color(0xFAAA9090),
+                color: Color.fromARGB(255, 24, 79, 175),
                 child: ListTile(
                   onTap: () {
                     //open edit pofile
                   },
                   title: Text(
-                    "Thinh",
+                    "Pino",
                     style: TextStyle(
                       color: Color.fromARGB(251, 255, 255, 255),
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  //    leading: CircleAvatar(backgroundColor: CachedNetworkImageProvider(avatars[0]),
+                  // leading: CircleAvatar(backgroundColor: CachedNetworkImageProvider(avatars[0]),
                   //  ),
                   trailing: Icon(
                     Icons.edit,
@@ -59,7 +59,7 @@ class SettingsOnePage extends StatelessWidget {
                   ListTile(
                     leading: Icon(
                       Icons.lock_outline,
-                      color: Colors.black,
+                      color: Colors.indigo,
                     ),
                     title: Text("Change Password"),
                     trailing: Icon(Icons.keyboard_arrow_right),
@@ -71,7 +71,7 @@ class SettingsOnePage extends StatelessWidget {
                   ListTile(
                     leading: Icon(
                       Icons.password,
-                      color: Colors.green,
+                      color: Colors.indigo,
                     ),
                     title: Text("Forgot Password"),
                     trailing: Icon(Icons.keyboard_arrow_right),
@@ -81,7 +81,7 @@ class SettingsOnePage extends StatelessWidget {
                   ),
                   _buildDivider(),
                   ListTile(
-                    leading: Icon(Icons.location_pin, color: Colors.green),
+                    leading: Icon(Icons.location_pin, color: Colors.indigo),
                     title: Text("Change Address"),
                     trailing: Icon(Icons.keyboard_arrow_right),
                     onTap: () {
@@ -98,24 +98,51 @@ class SettingsOnePage extends StatelessWidget {
                       color: Colors.indigo)),
               SwitchListTile(
                 dense: true,
-                activeColor: Colors.green,
+                activeColor: Colors.blue,
                 contentPadding: const EdgeInsets.all(0),
                 value: true,
                 title: Text("Received Notifications"),
                 onChanged: (value) {},
               ),
+              SwitchListTile(
+                dense: true,
+                activeColor: Colors.blue,
+                contentPadding: const EdgeInsets.all(0),
+                value: true,
+                title: Text("Received Newsletter"),
+                onChanged: null,
+              ),
+              SwitchListTile(
+                dense: true,
+                activeColor: Colors.blue,
+                contentPadding: const EdgeInsets.all(0),
+                value: true,
+                title: Text("Received Offer Notifications"),
+                onChanged: ((value) {}),
+              ),
+              SwitchListTile(
+                dense: true,
+                activeColor: Colors.blue,
+                contentPadding: const EdgeInsets.all(0),
+                value: true,
+                title: Text("Received App Update "),
+                onChanged: null,
+              ),
+              const SizedBox()
             ],
           )),
           Positioned(
               bottom: -20,
               left: -20,
               child: Container(
-                width: 60,
-                height: 60,
+                width: 80,
+                height: 80,
+                alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: Colors.green,
+                  color: Colors.blue,
                   shape: BoxShape.circle,
                 ),
+                child: Icon(Icons.logout, color: Colors.indigo),
               ))
         ],
       ),

@@ -32,7 +32,7 @@ class DetailsScreen extends StatelessWidget {
                   Container(
                     height: 300.0,
                     width: double.infinity,
-                    color: item.backgorundColor,
+                    //color: item.backgorundColor,
                     child: Padding(
                       padding: const EdgeInsets.only(top: 30.0),
                       child: Image(
