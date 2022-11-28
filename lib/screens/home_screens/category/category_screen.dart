@@ -62,7 +62,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         future: loadData(),
         builder: (context, AsyncSnapshot<List<Item>> snapshot) {
           if (snapshot.hasError) {
-            print("Loi cmnr");
+            print("Loi cmnr ${snapshot.error}");
           }
           if (snapshot.connectionState == ConnectionState.done) {
             return buildItem(snapshot.data);

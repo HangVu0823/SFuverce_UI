@@ -48,9 +48,8 @@ class Fake {
   static List<Item> furniture;
 
   void addDataFurniture() async {
-    print("hi2");
+    //print("hi2");
     furniture = await DatabaseService().getItemFromFirestore();
-    
   }
   // static List<Item> furniture = [
   //   Item(

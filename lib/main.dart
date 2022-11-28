@@ -20,7 +20,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print("hi1");
+    //print("hi1");
     // Fake().addDataFurniture();
 
     // print("datafurniture ${Fake.furniture}");
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         splashColor: Colors.transparent,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: FurnitureGridItem(),
+      home: PageNavigation(),
     );
   }
 }
