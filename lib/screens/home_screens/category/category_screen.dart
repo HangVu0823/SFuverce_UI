@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:sfuverce_app/data/fake.dart';
 import 'package:sfuverce_app/screens/home_screens/category/widgets_category/furniture_grid_item.dart';
 import 'package:sfuverce_app/screens/home_screens/category/widgets_category/header_sliver.dart';
+import 'package:sfuverce_app/services/database_service.dart';
 import 'package:sfuverce_app/widgets/app_bottom_navigation.dart';
+
+import '../../../models/item.dart';
 
 class CategoryScreen extends StatefulWidget {
   @override
@@ -10,8 +13,15 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
-  @override
-  Widget build(BuildContext context) {
+  Future<List<Item>> loadData() async {
+    print("start load");
+    List<Item> result = [];
+    result = await DatabaseService().getItemFromFirestore();
+    print("end load");
+    return result;
+  }
+
+  Widget buildItem(List<Item> furniture) {
     return Scaffold(
       // bottomNavigationBar: AppBottomNavigation(),
       backgroundColor: Colors.white,
@@ -31,7 +41,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
               childAspectRatio: 0.65,
               mainAxisSpacing: 16,
               crossAxisSpacing: 16,
-              children: Fake.furniture.asMap().entries.map((f) {
+              children: (furniture ?? []).asMap().entries.map((f) {
                 return FurnitureGridItem(
                     item: f.value,
                     margin: EdgeInsets.only(
@@ -44,5 +54,20 @@ class _CategoryScreenState extends State<CategoryScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+        future: loadData(),
+        builder: (context, AsyncSnapshot<List<Item>> snapshot) {
+          if (snapshot.hasError) {
+            print("Loi cmnr");
+          }
+          if (snapshot.connectionState == ConnectionState.done) {
+            return buildItem(snapshot.data);
+          }
+          return CircularProgressIndicator();
+        });
   }
 }

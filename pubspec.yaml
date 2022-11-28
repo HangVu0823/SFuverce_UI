@@ -43,6 +43,7 @@ dependencies:
   smooth_star_rating_null_safety: ^1.0.4+2
   percent_indicator: ^4.2.2
   cloud_firestore: ^4.1.0
+  firebase_core: ^2.3.0
 
 
   # The following adds the Cupertino Icons font to your application.

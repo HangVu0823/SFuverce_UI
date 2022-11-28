@@ -1,35 +1,77 @@
 {
   "project_info": {
-    "project_number": "281293454468",
-    "firebase_url": "https://sfuverce-app-default-rtdb.firebaseio.com",
-    "project_id": "sfuverce-app",
-    "storage_bucket": "sfuverce-app.appspot.com"
+    "project_number": "137253980627",
+    "project_id": "sfuverce-app-5c38d",
+    "storage_bucket": "sfuverce-app-5c38d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:281293454468:android:bf18f5e96ec7d1b10196d1",
+        "mobilesdk_app_id": "1:137253980627:android:162e0aa01e834b4a318726",
         "android_client_info": {
-          "package_name": "com.example.sfuverce_app"
+          "package_name": "com.example.flutter_interview_preparation"
         }
       },
       "oauth_client": [
         {
-          "client_id": "281293454468-5bmudupnghqufmh6om9j1ot7fhfctqko.apps.googleusercontent.com",
+          "client_id": "137253980627-g9g5rtpj8el4soaheepnb7uet6iiofe7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDnfQ353wxHbdgdYvKFj1n9XmqKN6NXqpU"
+          "current_key": "AIzaSyBQK5gR0aNMrSiFv1OTGPvwL9YnlL_JHis"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "281293454468-5bmudupnghqufmh6om9j1ot7fhfctqko.apps.googleusercontent.com",
+              "client_id": "137253980627-g9g5rtpj8el4soaheepnb7uet6iiofe7.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "137253980627-178k6ijapjgg48upk2csudiq1qgfusth.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterInterviewPreparation"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:137253980627:android:7ef6cc21ad1954b0318726",
+        "android_client_info": {
+          "package_name": "com.example.sfuverce_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "137253980627-g9g5rtpj8el4soaheepnb7uet6iiofe7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQK5gR0aNMrSiFv1OTGPvwL9YnlL_JHis"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "137253980627-g9g5rtpj8el4soaheepnb7uet6iiofe7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "137253980627-178k6ijapjgg48upk2csudiq1qgfusth.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterInterviewPreparation"
+              }
             }
           ]
         }

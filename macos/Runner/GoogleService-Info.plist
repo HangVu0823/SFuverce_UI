@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>137253980627-cjisr5pnc12gjhtd1oqradiafup2g8ol.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.137253980627-cjisr5pnc12gjhtd1oqradiafup2g8ol</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBFb7MCMekIPysXMb3cUdzGCvvrjpQ6r2s</string>
+	<key>GCM_SENDER_ID</key>
+	<string>137253980627</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.sfuverceApp</string>
+	<key>PROJECT_ID</key>
+	<string>sfuverce-app-5c38d</string>
+	<key>STORAGE_BUCKET</key>
+	<string>sfuverce-app-5c38d.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:137253980627:ios:e45fe7ec0dade8d8318726</string>
+</dict>
+</plist>

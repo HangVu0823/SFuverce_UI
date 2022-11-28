@@ -13,15 +13,15 @@ class Item {
   //Color backgorundColor;
 
   Item({
-    @required this.name,
-    @required this.imagePath,
-    @required this.originalPrice,
-    @required this.rating,
-    @required this.description,
-    @required this.height,
-    @required this.weight,
-    //@required this.backgorundColor,
-    @required this.color,
+    this.name,
+    this.imagePath,
+    this.originalPrice,
+    this.rating,
+    this.description,
+    this.height,
+    this.weight,
+    // this.backgorundColor,
+    this.color,
     this.discountPercent,
   });
 
@@ -46,6 +46,28 @@ class Item {
     int height = data['height'];
     int weight = data['weight'];
     String color = data['color'];
+    return Item(
+      color: color,
+      name: name,
+      imagePath: imagePath,
+      discountPercent: discountPercent,
+      originalPrice: originalPrice,
+      rating: rating,
+      description: description,
+      height: height,
+      weight: weight,
+    );
+  }
+  factory Item.test() {
+    String name = "data['name']";
+    String imagePath = "assets/images/furniture/items/chair3.png";
+    int discountPercent = 0;
+    double originalPrice = 0;
+    double rating = 0;
+    String description = "data['description']";
+    int height = 32;
+    int weight = 38;
+    String color = "Colors.black";
     return Item(
       color: color,
       name: name,
