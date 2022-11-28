@@ -4,6 +4,7 @@ import 'package:sfuverce_app/data/fake.dart';
 import 'package:sfuverce_app/screens/cart/cart_screen.dart';
 import 'package:sfuverce_app/models/item.dart';
 import 'package:sfuverce_app/constants/colors.dart';
+import 'package:sfuverce_app/screens/cart/option_modal_addCart.dart';
 import 'package:sfuverce_app/screens/chat/chat_products/chat_detailsScreen.dart';
 import 'package:sfuverce_app/screens/reviews/reviews.dart';
 import 'package:sfuverce_app/screens/reviews/reviewsUI.dart';
@@ -402,15 +403,7 @@ class DetailsScreen extends StatelessWidget {
                           size: 30.0,
                         ),
                         onPressed: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                'Added to your Cart !',
-                                textAlign: TextAlign.center,
-                              ),
-                              //backgroundColor: Colors.grey,
-                            ),
-                          );
+                          _settingModalBottomSheet(context);
                         },
                       )),
 
@@ -466,4 +459,20 @@ class DetailsScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+void _settingModalBottomSheet(context) {
+  showModalBottomSheet(
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20.0),
+          topRight: Radius.circular(20.0),
+        ),
+      ),
+      context: context,
+      builder: (BuildContext bc) {
+        return OptionModal_AddCart();
+      });
 }
