@@ -47,10 +47,6 @@ class Fake {
 
   static List<Item> furniture;
 
-  void addDataFurniture() async {
-    //print("hi2");
-    furniture = await DatabaseService().getItemFromFirestore();
-  }
   // static List<Item> furniture = [
   //   Item(
   //     name: 'Chair Dacey li - Black',

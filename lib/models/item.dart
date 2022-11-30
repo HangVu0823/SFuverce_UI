@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class Item {
   String name;
   String imagePath;
@@ -36,7 +34,8 @@ class Item {
     return '\$$money';
   }
 
-  factory Item.fromJson(Map<String, dynamic> data) {
+  factory Item.fromJson(Map<String, dynamic> data, String id) {
+    //print("aaaa $id");
     String name = data['name'];
     String imagePath = data['imagePath'];
     int discountPercent = data['discountPercent'];
@@ -80,4 +79,10 @@ class Item {
       weight: weight,
     );
   }
+}
+
+class CategoriesFirebase {
+  String id;
+  String title;
+  CategoriesFirebase({this.id, this.title});
 }
