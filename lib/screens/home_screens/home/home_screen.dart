@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sfuverce_app/data/fake.dart';
 import 'package:sfuverce_app/screens/home_screens/category/category_screen.dart';
+import 'package:sfuverce_app/screens/home_screens/category/widgets_category/category_controler.dart';
 import 'package:sfuverce_app/screens/home_screens/home/widgets_home/category_card.dart';
 import 'package:sfuverce_app/screens/home_screens/home/widgets_home/header.dart';
 import 'package:sfuverce_app/screens/home_screens/home/widgets_home/image_card.dart';
@@ -11,7 +12,9 @@ import 'package:sfuverce_app/widgets/app_bottom_navigation.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key key}) : super(key: key);
 
-  onCategorySelected(BuildContext context, category) {
+  onCategorySelected(BuildContext context, category, String content) {
+    CategoryController.onSelected = content;
+
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -35,7 +38,11 @@ class HomeScreen extends StatelessWidget {
                   title: c.title,
                   iconPath: c.iconPath,
                   onTap: () {
-                    onCategorySelected(context, c);
+                    onCategorySelected(
+                      context,
+                      c,
+                      c.title,
+                    );
                   },
                 );
               }).toList(),

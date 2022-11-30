@@ -106,7 +106,7 @@ class Fake {
   //   ),
   //   Item(
   //     name: 'Chair Dacey li - White',
-  //     imagePath: 'assets/images/furniture/items/CHair 2.png',
+  //     imagePath: 'assets\images\furniture\items\CHair 2.png',
   //     originalPrice: 80,
   //     rating: 4.3,
   //     discountPercent: 20,

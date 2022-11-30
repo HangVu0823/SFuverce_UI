@@ -87,6 +87,7 @@ flutter:
     - assets/images/cart/
     - assets/images/furniture/
     - assets/images/furniture/items/
+    - assets/images/furniture/items/LivingRoom/
     
   fonts:
     - family: CustomIcons

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sfuverce_app/data/fake.dart';
+import 'package:sfuverce_app/screens/home_screens/category/widgets_category/category_controler.dart';
 import 'package:sfuverce_app/screens/home_screens/category/widgets_category/filter_modal_bottom_sheet.dart';
 import 'package:sfuverce_app/screens/home_screens/category/widgets_category/vertical_separator.dart';
 import 'package:sfuverce_app/widgets/cart.dart';
@@ -44,7 +45,7 @@ class Header extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'Living Room',
+                  CategoryController.onSelected,
                   style: TextStyle(fontSize: 18.0),
                 ),
                 Container(
