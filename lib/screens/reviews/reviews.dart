@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:provider/provider.dart';
 import 'package:sfuverce_app/constants/colors.dart';
 import 'package:sfuverce_app/data/fake.dart';
 import 'package:sfuverce_app/models/models_review/ReviewModal.dart';
@@ -10,16 +11,11 @@ import 'package:sfuverce_app/screens/home_screens/category/category_screen.dart'
 import 'package:sfuverce_app/screens/reviews/reviewsUI.dart';
 import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
 
-class Reviews extends StatefulWidget {
-  const Reviews({Key key}) : super(key: key);
-
-  @override
-  _ReviewsState createState() => _ReviewsState();
-}
-
-class _ReviewsState extends State<Reviews> {
+class Reviews extends StatelessWidget {
+  Reviews({Key key, this.data}) : super(key: key);
   bool isMore = false;
   List<double> rating = [0.1, 0.3, 0.5, 0.7, 0.9];
+  final List<ReviewModal> data;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,7 +76,7 @@ class _ReviewsState extends State<Reviews> {
                       borderColor: Colors.yellow,
                     ),
                     Text(
-                      "${Fake.review.length} Review",
+                      "${data.length} Review",
                       style: TextStyle(
                         fontSize: 20.0,
                         color: kLightColor,
@@ -125,18 +121,18 @@ class _ReviewsState extends State<Reviews> {
                 bottom: 8.0,
                 top: 8.0,
               ),
-              itemCount: Fake.review.length,
+              itemCount: data.length,
               itemBuilder: (context, index) {
                 return ReviewsUI(
-                  image: Fake.review[index].image,
-                  name: Fake.review[index].name,
-                  date: Fake.review[index].date,
-                  comments: Fake.review[index].comments,
-                  rating: Fake.review[index].rating,
+                  image: data[index].image,
+                  name: data[index].name,
+                  date: data[index].date,
+                  comments: data[index].comments,
+                  rating: data[index].rating,
                   onPressed: () => print("More Action $index"),
-                  onTap: () => setState(() {
-                    isMore = !isMore;
-                  }),
+                  // onTap: () => setState(() {
+                  //   isMore = !isMore;
+                  // }),
                   isLess: isMore,
                 );
               },

@@ -1,4 +1,19 @@
+import 'package:sfuverce_app/models/parse.dart';
+
 class Item {
+  /// String categoryId;
+  /// String productId;
+  /// String name;
+  /// String imagePath;
+  /// int discountPercent;
+  /// double originalPrice;
+  /// double rating;
+  /// String description;
+  /// int height;
+  /// int weight;
+  /// final String color;
+  String categoryId;
+  String productId;
   String name;
   String imagePath;
   int discountPercent;
@@ -8,9 +23,10 @@ class Item {
   int height;
   int weight;
   final String color;
-  //Color backgorundColor;
 
   Item({
+    this.categoryId,
+    this.productId,
     this.name,
     this.imagePath,
     this.originalPrice,
@@ -18,7 +34,6 @@ class Item {
     this.description,
     this.height,
     this.weight,
-    // this.backgorundColor,
     this.color,
     this.discountPercent,
   });
@@ -34,40 +49,23 @@ class Item {
     return '\$$money';
   }
 
-  factory Item.fromJson(Map<String, dynamic> data, String id) {
+  factory Item.fromJson(
+      Map<String, dynamic> data, String id, String categoryid) {
     //print("aaaa $id");
+    String categoryId = categoryid;
+    String productId = id;
     String name = data['name'];
     String imagePath = data['imagePath'];
-    int discountPercent = data['discountPercent'];
-    double originalPrice = data['originalPrice'];
-    double rating = data['rating'];
+    int discountPercent = Parse.parseIntFromJson(data['discountPercent']);
+    double originalPrice = Parse.parseDoubleFromJson(data['originalPrice']);
+    double rating = Parse.parseDoubleFromJson(data['rating']);
     String description = data['description'];
-    int height = data['height'];
-    int weight = data['weight'];
+    int height = Parse.parseIntFromJson(data['height']);
+    int weight = Parse.parseIntFromJson(data['weight']);
     String color = data['color'];
     return Item(
-      color: color,
-      name: name,
-      imagePath: imagePath,
-      discountPercent: discountPercent,
-      originalPrice: originalPrice,
-      rating: rating,
-      description: description,
-      height: height,
-      weight: weight,
-    );
-  }
-  factory Item.test() {
-    String name = "data['name']";
-    String imagePath = "assets/images/furniture/items/chair3.png";
-    int discountPercent = 0;
-    double originalPrice = 0;
-    double rating = 0;
-    String description = "data['description']";
-    int height = 32;
-    int weight = 38;
-    String color = "Colors.black";
-    return Item(
+      categoryId: categoryId,
+      productId: id,
       color: color,
       name: name,
       imagePath: imagePath,

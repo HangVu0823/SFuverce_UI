@@ -84,10 +84,13 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/images/user/
+    - assets/images/user/user_avatar/
     - assets/images/cart/
     - assets/images/furniture/
     - assets/images/furniture/items/
     - assets/images/furniture/items/LivingRoom/
+    - assets/images/furniture/items/Bathroom/
+    - assets/images/furniture/items/Workspace/
     
   fonts:
     - family: CustomIcons
