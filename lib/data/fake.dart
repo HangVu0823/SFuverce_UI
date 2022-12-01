@@ -3,8 +3,6 @@ import 'package:sfuverce_app/models/models_home/category.dart';
 import 'package:sfuverce_app/models/item.dart';
 import 'package:sfuverce_app/models/models_home/promotion.dart';
 import 'package:sfuverce_app/models/models_order/track_order.dart';
-import 'package:sfuverce_app/models/models_review/ReviewModal.dart';
-import 'package:sfuverce_app/services/database_service.dart';
 
 class Fake {
   static int numberOfItemsInCart = 1;
@@ -13,6 +11,7 @@ class Fake {
     Category('assets/icons/chest.svg', 'Living Room'),
     Category('assets/icons/bathtub.svg', 'Bathroom'),
     Category('assets/icons/desk.svg', 'Workspace'),
+    Category('assets/icons/bed2.svg', 'Bedroom')
   ];
 
   static List<Promotion> promotions = [

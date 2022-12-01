@@ -21,7 +21,7 @@ class ReviewModal {
     //print("aaaa $id");
     String firebaseId = id;
     String name = data['name'];
-    String image = data['imagePath'];
+    String image = data['image'];
     double rating = Parse.parseDoubleFromJson(data['rating']);
     String date = data['date'];
     String comments = data['comments'];
@@ -31,6 +31,7 @@ class ReviewModal {
       name: name,
       image: image,
       rating: rating,
+      date: date,
       comments: comments,
     );
   }

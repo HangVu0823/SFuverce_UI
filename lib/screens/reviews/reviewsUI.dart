@@ -21,6 +21,7 @@ class ReviewsUI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(image.toString());
     return Container(
       padding: EdgeInsets.only(top: 2.0, bottom: 2.0, left: 16.0, right: 0.0),
       child: Column(

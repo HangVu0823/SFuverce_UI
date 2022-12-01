@@ -80,7 +80,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           if (snapshot.connectionState == ConnectionState.done) {
             return buildItem(snapshot.data);
           }
-          return CircularProgressIndicator();
+          return Center(child: CircularProgressIndicator());
         });
   }
 }
