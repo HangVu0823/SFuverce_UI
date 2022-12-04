@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:sfuverce_app/search_screen/search_screen.dart';
 
 class SearchBar extends StatelessWidget {
   @override
@@ -18,6 +20,7 @@ class SearchBar extends StatelessWidget {
         ],
       ),
       child: TextFormField(
+        readOnly: true,
         decoration: InputDecoration(
           icon: SvgPicture.asset('assets/icons/search.svg'),
           hintText: 'Search unique furniture...',
@@ -26,6 +29,10 @@ class SearchBar extends StatelessWidget {
             fontSize: 14.0,
           ),
           border: InputBorder.none,
+        ),
+        onTap: () => Navigator.push(
+          context,
+          CupertinoPageRoute(builder: (_) => SearchSreen()),
         ),
       ),
     );

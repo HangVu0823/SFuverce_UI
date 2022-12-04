@@ -1,10 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:sfuverce_app/constants/colors.dart';
-import 'package:sfuverce_app/data/fake.dart';
 import 'package:sfuverce_app/firebase_options.dart';
-import 'package:sfuverce_app/screens/home_screens/category/widgets_category/furniture_grid_item.dart';
-import 'package:sfuverce_app/widgets/app_bottom_navigation.dart';
+import 'package:sfuverce_app/splash/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +31,7 @@ class MyApp extends StatelessWidget {
         splashColor: Colors.transparent,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: PageNavigation(),
+      home: SplashScreen(),
     );
   }
 }
