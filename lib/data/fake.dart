@@ -11,7 +11,8 @@ class Fake {
     Category('assets/icons/chest.svg', 'Living Room'),
     Category('assets/icons/bathtub.svg', 'Bathroom'),
     Category('assets/icons/desk.svg', 'Workspace'),
-    Category('assets/icons/bed2.svg', 'Bedroom')
+    Category('assets/icons/bed2.svg', 'Bedroom'),
+    Category('assets/icons/kitchen.svg', 'Kitchen'),
   ];
 
   static List<Promotion> promotions = [

@@ -22,11 +22,9 @@ class ChatDetailScreen extends StatelessWidget {
   const ChatDetailScreen({
     Key key,
     @required this.item,
-    @required this.margin,
   }) : super(key: key);
 
   final Item item;
-  final EdgeInsets margin;
 
   @override
   Widget build(BuildContext context) {

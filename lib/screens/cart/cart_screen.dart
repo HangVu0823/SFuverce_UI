@@ -1,10 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:sfuverce_app/custom-icons/custom-icons.dart';
-import 'package:sfuverce_app/data/data_cart.dart';
 import 'package:sfuverce_app/models/models_cart/cart.dart';
-import 'package:sfuverce_app/widgets/app_bottom_navigation.dart';
+import 'package:sfuverce_app/models/models_cart/user.dart';
+import 'package:sfuverce_app/services/database_service.dart';
+import '../../models/models_cart/item_cart.dart';
 
 class CartScreen extends StatefulWidget {
   @override
@@ -50,9 +52,30 @@ class _CartScreenState extends State<CartScreen> {
               height: 100.0,
               decoration: BoxDecoration(
                   color: Colors.red, borderRadius: BorderRadius.circular(20.0)),
-              child: Icon(
-                Icons.delete,
+              child: IconButton(
+                icon: Icon(Icons.delete),
                 color: Colors.white,
+                onPressed: () {
+                  FutureBuilder(
+                    future: DatabaseService().deleteItemCartFromFirestore(cart),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        print("Loi cmnr ${snapshot.error}");
+                      }
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        Fluttertoast.showToast(
+                            msg: "Add to cart successfully",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER_RIGHT,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.white,
+                            textColor: Colors.black,
+                            fontSize: 16.0);
+                      }
+                      return Center(child: CircularProgressIndicator());
+                    },
+                  );
+                },
               ),
             ),
           )
@@ -85,14 +108,14 @@ class _CartScreenState extends State<CartScreen> {
                         topLeft: Radius.circular(30.0),
                         bottomLeft: Radius.circular(30.0),
                       ),
-                      color: cart.chair.backgorundColor,
+                      //color: cart.itemCart.backgorundColor,
                     ),
                     child: Padding(
                       padding: EdgeInsets.only(top: 10.0),
                       child: Image(
                         height: 200.0,
                         width: 200.0,
-                        image: AssetImage(cart.chair.imageUrl),
+                        image: AssetImage(cart.itemCart.imagePath),
                         fit: BoxFit.fitHeight,
                       ),
                     ),
@@ -105,7 +128,7 @@ class _CartScreenState extends State<CartScreen> {
                         child: Padding(
                           padding: EdgeInsets.only(left: 4.0, top: 15.0),
                           child: Text(
-                            cart.chair.name,
+                            cart.itemCart.name,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18.0,
@@ -123,7 +146,7 @@ class _CartScreenState extends State<CartScreen> {
                                 child: Padding(
                                   padding: EdgeInsets.only(left: 4.0),
                                   child: Text(
-                                    cart.chair.color,
+                                    cart.itemCart.color,
                                     style: TextStyle(
                                         color: Colors.black26, fontSize: 13.0),
                                     overflow: TextOverflow.ellipsis,
@@ -134,44 +157,20 @@ class _CartScreenState extends State<CartScreen> {
                                 width: 140.0,
                                 child: Padding(
                                   padding: EdgeInsets.only(left: 4.0),
-                                  child: Text(
-                                    cart.chair.type,
-                                    style: TextStyle(
-                                      color: Colors.black26,
-                                      fontSize: 12.0,
-                                    ),
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
+                                  // child: Text(
+                                  //   cart.itemCart.type,
+                                  //   style: TextStyle(
+                                  //     color: Colors.black26,
+                                  //     fontSize: 12.0,
+                                  //   ),
+                                  //   overflow: TextOverflow.ellipsis,
+                                  // ),
                                 ),
                               )
                             ],
                           ),
                           Row(
                             children: [
-                              Container(
-                                height: 20.0,
-                                width: 20.0,
-                                child: Center(
-                                  child: FloatingActionButton(
-                                    child: Icon(
-                                      FontAwesomeIcons.plus,
-                                      color: Colors.white,
-                                      size: 12.0,
-                                    ),
-                                    onPressed: _incrementCount,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 10.0),
-                                child: Text(
-                                  "${quality}",
-                                  style: TextStyle(
-                                    color: Colors.blueGrey,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
                               Container(
                                 height: 20.0,
                                 width: 20.0,
@@ -186,6 +185,30 @@ class _CartScreenState extends State<CartScreen> {
                                   ),
                                 ),
                               ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                                child: Text(
+                                  "${cart.itemCart.number}",
+                                  style: TextStyle(
+                                    color: Colors.blueGrey,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                height: 20.0,
+                                width: 20.0,
+                                child: Center(
+                                  child: FloatingActionButton(
+                                    child: Icon(
+                                      FontAwesomeIcons.plus,
+                                      color: Colors.white,
+                                      size: 12.0,
+                                    ),
+                                    onPressed: _incrementCount,
+                                  ),
+                                ),
+                              ),
                             ],
                           )
                         ],
@@ -195,7 +218,7 @@ class _CartScreenState extends State<CartScreen> {
                         child: Padding(
                           padding: EdgeInsets.only(left: 4.0),
                           child: Text(
-                            '\$' + cart.chair.price.toString(),
+                            '\$' + cart.itemCart.originalPrice.toString(),
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18.0,
@@ -217,11 +240,36 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    int productPrice = 0;
-    currentUser.cart.forEach(
-        (Cart cart) => productPrice += cart.quantity * cart.chair.price);
-    int totalPrice = productPrice + 20;
+    return FutureBuilder(
+      future: DatabaseService().getItemCartFromFirestore(),
+      builder: (context, AsyncSnapshot<List<ItemCart>> snapshot) {
+        if (snapshot.hasError) {
+          print("Loi: ${snapshot.error}");
+        }
+        if (snapshot.connectionState == ConnectionState.done) {
+          List<Cart> listCart = [];
+          for (int i = 0; i < snapshot.data.length; i++) {
+            listCart.add(Cart(
+                itemCart: snapshot.data[i], quantity: snapshot.data[i].number));
+          }
+          final currentUser = UserCart(
+              name: FirebaseAuth.instance.currentUser.email, cart: listCart);
+          int productPrice = 0;
+          currentUser.cart.forEach((Cart cart) => productPrice +=
+              (cart.quantity * cart.itemCart.originalPrice) as int);
+          int totalPrice = productPrice;
 
+          return buildItem(context, currentUser, productPrice, totalPrice);
+        }
+        return Center(child: CircularProgressIndicator());
+      },
+    );
+  }
+
+  Scaffold buildItem(
+      BuildContext context, currentUser, int productPrice, int totalPrice) {
+    int deliveryPrice = currentUser.cart.isEmpty ? 0 : 20;
+    totalPrice += deliveryPrice;
     return Scaffold(
       // bottomNavigationBar: AppBottomNavigation(),
       appBar: AppBar(
@@ -310,7 +358,7 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                   ),
                   Text(
-                    '\$20',
+                    deliveryPrice.toString(),
                     style: TextStyle(color: Colors.black, fontSize: 20.0),
                   )
                 ],

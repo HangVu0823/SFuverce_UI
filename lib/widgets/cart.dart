@@ -28,7 +28,7 @@ class Cart extends StatelessWidget {
         //       height: 24.0,
         //       child:
         //       SvgPicture.asset('assets/icons/cart.svg'),
-        if (numberOfItemsInCart > 0)
+        //if (numberOfItemsInCart > 0)
           Positioned(
             top: -4.0,
             right: -4.0,

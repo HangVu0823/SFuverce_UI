@@ -1,14 +1,14 @@
 import 'package:sfuverce_app/models/models_cart/chair.dart';
 import 'package:sfuverce_app/models/item.dart';
 
+import 'item_cart.dart';
+
 class Cart {
-  final Chair chair;
-  final Item item;
+  final ItemCart itemCart;
   final int quantity;
 
   Cart({
-    this.item,
-    this.chair,
+    this.itemCart,
     this.quantity,
   });
 }

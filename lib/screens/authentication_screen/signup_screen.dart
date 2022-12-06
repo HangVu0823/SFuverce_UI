@@ -224,7 +224,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   TextStyle(color: Colors.white, fontSize: 18),
                             ),
                             style: ElevatedButton.styleFrom(
-                              primary: AppColors.deep_orange,
+                              primary: Color.fromRGBO(63, 81, 181, 0.9),
                               elevation: 3,
                             ),
                           ),

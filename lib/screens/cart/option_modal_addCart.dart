@@ -1,7 +1,19 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sfuverce_app/constants/colors.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sfuverce_app/screens/home_screens/category/widgets_category/color_list.dart';
+import 'package:sfuverce_app/services/database_service.dart';
+import 'package:sfuverce_app/services/product_service.dart';
+
+import '../../models/item.dart';
+
+class DataAddToCart {
+  static Item item;
+  static int number;
+  static Color color;
+}
 
 class OptionModal_AddCart extends StatefulWidget {
   _OptionModalBottomSheetState createState() => _OptionModalBottomSheetState();
@@ -67,7 +79,9 @@ class _OptionModalBottomSheetState extends State<OptionModal_AddCart> {
                 Colors.cyan,
                 Colors.red,
               ],
-              onSelect: (color) => print(color),
+              onSelect: (color) {
+                DataAddToCart.color = color;
+              },
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -91,11 +105,11 @@ class _OptionModalBottomSheetState extends State<OptionModal_AddCart> {
                       child: Center(
                         child: FloatingActionButton(
                           child: Icon(
-                            FontAwesomeIcons.plus,
+                            FontAwesomeIcons.minus,
                             color: Colors.white,
                             size: 12.0,
                           ),
-                          onPressed: _incrementCount,
+                          onPressed: _decrementCount,
                         ),
                       ),
                     ),
@@ -115,11 +129,11 @@ class _OptionModalBottomSheetState extends State<OptionModal_AddCart> {
                       child: Center(
                         child: FloatingActionButton(
                           child: Icon(
-                            FontAwesomeIcons.minus,
+                            FontAwesomeIcons.plus,
                             color: Colors.white,
                             size: 12.0,
                           ),
-                          onPressed: _decrementCount,
+                          onPressed: _incrementCount,
                         ),
                       ),
                     ),
@@ -127,26 +141,41 @@ class _OptionModalBottomSheetState extends State<OptionModal_AddCart> {
                 )
               ],
             ),
-            Container(
-              width: double.infinity,
-              margin: EdgeInsets.symmetric(vertical: 20),
-              child: ElevatedButton(
-                child: Text(
-                  'Add to cart',
-                  style: TextStyle(fontSize: 16, color: Colors.white),
-                ),
-                style: ButtonStyle(
-                    shape: MaterialStateProperty.all<OutlinedBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(30.0),
+            InkWell(
+              onTap: () {
+                DataAddToCart.number = quality;
+
+                // print("object");
+                FutureBuilder(
+                  future: DatabaseService().addItemToCart(),
+                  builder: (context, AsyncSnapshot<void> snapshot) {
+                    if (snapshot.hasError) {
+                      print(snapshot.error);
+                    }
+                  },
+                );
+              },
+              child: Container(
+                width: double.infinity,
+                margin: EdgeInsets.symmetric(vertical: 20),
+                child: ElevatedButton(
+                  child: Text(
+                    'Add to cart',
+                    style: TextStyle(fontSize: 16, color: Colors.white),
+                  ),
+                  style: ButtonStyle(
+                      shape: MaterialStateProperty.all<OutlinedBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(30.0),
+                          ),
                         ),
                       ),
-                    ),
-                    backgroundColor: MaterialStateProperty.all(primaryColor),
-                    padding: MaterialStateProperty.all(EdgeInsets.all(20)),
-                    textStyle:
-                        MaterialStateProperty.all(TextStyle(fontSize: 16))),
+                      backgroundColor: MaterialStateProperty.all(primaryColor),
+                      padding: MaterialStateProperty.all(EdgeInsets.all(20)),
+                      textStyle:
+                          MaterialStateProperty.all(TextStyle(fontSize: 16))),
+                ),
               ),
             ),
           ],

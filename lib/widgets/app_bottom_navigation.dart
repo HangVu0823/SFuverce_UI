@@ -4,6 +4,7 @@ import 'package:sfuverce_app/constants/colors.dart';
 import 'package:sfuverce_app/screens/chat/chat_admin/chat_admin.dart';
 import 'package:sfuverce_app/screens/delivery/trackorder.dart';
 import 'package:sfuverce_app/screens/user_profile/user.dart';
+import 'package:sfuverce_app/screens/wallet/wallet.dart';
 
 import '../screens/home_screens/home/home_screen.dart';
 
@@ -120,6 +121,11 @@ class _PageNavigationState extends State<PageNavigation> {
       case 2:
         {
           res = ChatAdminScreen();
+          break;
+        }
+      case 3:
+        {
+          res = Wallet();
           break;
         }
       case 4:

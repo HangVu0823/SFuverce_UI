@@ -12,7 +12,7 @@ Widget customButton(String buttonText, onPressed) {
         style: TextStyle(color: Colors.white, fontSize: 18),
       ),
       style: ElevatedButton.styleFrom(
-        primary: Colors.red,
+        primary: Color.fromRGBO(63, 81, 181, 0.9),
         elevation: 3,
       ),
     ),

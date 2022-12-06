@@ -1,17 +1,7 @@
 import 'package:sfuverce_app/models/parse.dart';
+import 'package:sfuverce_app/screens/cart/option_modal_addCart.dart';
 
 class Item {
-  /// String categoryId;
-  /// String productId;
-  /// String name;
-  /// String imagePath;
-  /// int discountPercent;
-  /// double originalPrice;
-  /// double rating;
-  /// String description;
-  /// int height;
-  /// int weight;
-  /// final String color;
   String categoryId;
   String productId;
   String name;
@@ -76,6 +66,22 @@ class Item {
       height: height,
       weight: weight,
     );
+  }
+  Map<String, dynamic> toJson() {
+    return {
+      'categoryId': categoryId,
+      'productId': productId,
+      'color': color,
+      'name': name,
+      'imagePath': imagePath,
+      'discountPercent': discountPercent,
+      'originalPrice': originalPrice,
+      'rating': rating,
+      'description': description,
+      'height': height,
+      'weight': weight,
+      'number': DataAddToCart.number,
+    };
   }
 }
 

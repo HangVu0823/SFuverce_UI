@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:sfuverce_app/data/fake.dart';
 import 'package:sfuverce_app/screens/cart/cart_screen.dart';
 import 'package:sfuverce_app/models/item.dart';
 import 'package:sfuverce_app/constants/colors.dart';
@@ -16,11 +15,9 @@ class DetailsScreen extends StatelessWidget {
   const DetailsScreen({
     Key key,
     @required this.item,
-    @required this.margin,
   }) : super(key: key);
 
   final Item item;
-  final EdgeInsets margin;
 
   Future<List<ReviewModal>> loadDataReview() async {
     List<ReviewModal> result = [];
@@ -298,11 +295,14 @@ class DetailsScreen extends StatelessWidget {
                         );
                       },
                     )
-                  : Text(
-                      "Empty Reviews",
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
+                  : Container(
+                      padding: EdgeInsets.only(left: 20.0),
+                      child: Text(
+                        "Empty Reviews",
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
               SizedBox(
@@ -411,7 +411,6 @@ class DetailsScreen extends StatelessWidget {
                           MaterialPageRoute(
                             builder: (_) => ChatDetailScreen(
                               item: item,
-                              margin: margin,
                             ),
                           ),
                         ),
@@ -440,6 +439,7 @@ class DetailsScreen extends StatelessWidget {
                           size: 30.0,
                         ),
                         onPressed: () {
+                          DataAddToCart.item = item;
                           _settingModalBottomSheet(context);
                         },
                       )),

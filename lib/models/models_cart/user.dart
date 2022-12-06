@@ -1,10 +1,10 @@
 import 'package:sfuverce_app/models/models_cart/cart.dart';
 
-class User {
+class UserCart {
   final String name;
   final List<Cart> cart;
 
-  User({
+  UserCart({
     this.name,
     this.cart,
   });

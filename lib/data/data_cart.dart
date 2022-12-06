@@ -128,24 +128,24 @@ List<IconData> categoryIcon = [
   CustomIcons.desktop,
 ];
 
-final currentUser = User(
-  name: 'Sayuj',
-  cart: [
-    Cart(
-      chair: _deskChair,
-      quantity: 3,
-    ),
-    Cart(
-      chair: _woodChair,
-      quantity: 1,
-    ),
-    Cart(
-      chair: _royalChair,
-      quantity: 2,
-    ),
-    Cart(
-      chair: _odinChair,
-      quantity: 3,
-    ),
-  ],
-);
+// final currentUser = User(
+//   name: 'Sayuj',
+//   cart: [
+//     Cart(
+//       chair: _deskChair,
+//       quantity: 3,
+//     ),
+//     Cart(
+//       chair: _woodChair,
+//       quantity: 1,
+//     ),
+//     Cart(
+//       chair: _royalChair,
+//       quantity: 2,
+//     ),
+//     Cart(
+//       chair: _odinChair,
+//       quantity: 3,
+//     ),
+//   ],
+// );

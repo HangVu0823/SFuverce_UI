@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sfuverce_app/const/AppColors.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sfuverce_app/screens/authentication_screen/signup_screen.dart';
 import 'package:sfuverce_app/screens/authentication_screen/widget/customButton.dart';
@@ -49,28 +48,24 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(
-              // height: 150,
-              // width: 100,
-              child: Padding(
-                padding: EdgeInsets.only(left: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    IconButton(
-                      onPressed: null,
-                      icon: Icon(
-                        Icons.light,
-                        color: Colors.transparent,
-                      ),
+            Container(
+              padding: EdgeInsets.only(left: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  IconButton(
+                    onPressed: null,
+                    icon: Icon(
+                      Icons.light,
+                      color: Colors.transparent,
                     ),
-                    Text(
-                      "Sign In",
-                      style: TextStyle(fontSize: 22, color: Colors.white),
-                    ),
-                  ],
-                ),
+                  ),
+                  Text(
+                    "Sign In",
+                    style: TextStyle(fontSize: 22, color: Colors.white),
+                  ),
+                ],
               ),
             ),
             Expanded(

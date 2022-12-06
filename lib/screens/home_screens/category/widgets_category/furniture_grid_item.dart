@@ -41,8 +41,9 @@ class FurnitureGridItem extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (_) =>
-                                    DetailsScreen(item: item, margin: margin)),
+                                builder: (_) => DetailsScreen(
+                                      item: item,
+                                    )),
                           );
                         },
                         child: item.imagePath != null

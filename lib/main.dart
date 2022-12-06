@@ -18,10 +18,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //print("hi1");
-    // Fake().addDataFurniture();
-
-    // print("datafurniture ${Fake.furniture}");
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'SFUVERCE',

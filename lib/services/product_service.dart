@@ -1,6 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:sfuverce_app/screens/cart/option_modal_addCart.dart';
 
 import '../models/item.dart';
+import '../models/models_cart/cart.dart';
+import '../models/models_cart/item_cart.dart';
 import '../models/models_review/ReviewModal.dart';
 import '../screens/reviews/reviews.dart';
 
@@ -25,6 +31,26 @@ mixin ProductService {
     return item;
   }
 
+  Future<void> addItemToCart() async {
+    CollectionReference collection = _db
+        .collection('users-form-data')
+        .doc(FirebaseAuth.instance.currentUser.email)
+        .collection('cart');
+    await collection
+        .doc(DataAddToCart.item.productId)
+        .set(DataAddToCart.item.toJson())
+        .then((value) {
+      Fluttertoast.showToast(
+          msg: "Add to cart successfully",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER_RIGHT,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.white,
+          textColor: Colors.black,
+          fontSize: 16.0);
+    });
+  }
+
   Future<List<CategoriesFirebase>> getCategoriesFromFirestore() async {
     //print("hi3");
     CollectionReference collection = _db.collection('Categories');
@@ -43,6 +69,35 @@ mixin ProductService {
       }).toList();
     });
     return categories;
+  }
+
+  Future<List<ItemCart>> getItemCartFromFirestore() async {
+    //print("hi3");
+    CollectionReference collection = _db.collection('users-form-data')
+        .doc(FirebaseAuth.instance.currentUser.email)
+        .collection('cart');
+    List<ItemCart> itemCart;
+    await collection.get().then((QuerySnapshot querySnapshot) {
+      itemCart = querySnapshot.docs.map((doc) {
+        //print("hello ban loi ban co o day khong");
+        if (doc.exists) {
+           Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+          ItemCart a = ItemCart.fromJson(data);
+          //print("aaaa $a");
+          return a;
+        }
+        return ItemCart();
+      }).toList();
+    });
+    return itemCart;
+  }
+
+  Future<void> deleteItemCartFromFirestore(Cart cart) async {
+    //print("hi3");
+    _db.collection('users-form-data')
+        .doc(FirebaseAuth.instance.currentUser.email)
+        .collection('cart').doc(cart.itemCart.productId).delete();
+       
   }
 
   Future<List<ReviewModal>> getReviewModalFromFirestore(
