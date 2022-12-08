@@ -197,9 +197,7 @@ class DetailsScreen extends StatelessWidget {
                 padding: EdgeInsets.only(left: 20.0),
                 child: Text('Details', style: TextStyle(fontSize: 24.0)),
               ),
-              SizedBox(
-                height: 5.0
-              ),
+              SizedBox(height: 5.0),
               Padding(
                 padding: EdgeInsets.only(left: 20.0, right: 10.0),
                 child: Text(
@@ -237,17 +235,14 @@ class DetailsScreen extends StatelessWidget {
                                 Text(
                                   'View all',
                                   style: TextStyle(
-                                    fontSize: 18.0,
-                                    height: 1,
-                                    color: primaryColor
-                                  ),
+                                      fontSize: 18.0,
+                                      height: 1,
+                                      color: primaryColor),
                                 ),
                                 Padding(
                                   padding: EdgeInsets.only(right: 10.0),
-                                  child: Icon(
-                                    Icons.arrow_forward,
-                                    color: primaryColor
-                                  ),
+                                  child: Icon(Icons.arrow_forward,
+                                      color: primaryColor),
                                 ),
                               ],
                             ),
