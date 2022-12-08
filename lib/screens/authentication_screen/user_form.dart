@@ -69,7 +69,8 @@ class _UserFormState extends State<UserForm> {
                     ),
                 Text(
                   "Submit the form to continue.",
-                  style: TextStyle(fontSize: 22, color: AppColors.deep_orange),
+                  style: TextStyle(
+                      fontSize: 22, color: Color.fromARGB(255, 157, 184, 225)),
                 ),
                 Text(
                   "We will not share your information with anyone.",

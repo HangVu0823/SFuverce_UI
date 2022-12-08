@@ -3,23 +3,27 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:sfuverce_app/screens/cart/cart_screen.dart';
 import 'package:sfuverce_app/models/item.dart';
 import 'package:sfuverce_app/constants/colors.dart';
-import 'package:sfuverce_app/screens/cart/option_modal_addCart.dart';
 import 'package:sfuverce_app/screens/chat/chat_products/chat_detailsScreen.dart';
 import 'package:sfuverce_app/screens/reviews/reviews.dart';
 import 'package:sfuverce_app/screens/reviews/reviewsUI.dart';
 import 'package:sfuverce_app/services/database_service.dart';
 
 import '../../models/models_review/ReviewModal.dart';
+import '../screens/cart/option_modal_addCart.dart';
 
-class DetailsScreen extends StatelessWidget {
-  const DetailsScreen({
+class SearchDetailProduct extends StatelessWidget {
+  SearchDetailProduct({
     Key key,
-    @required this.item,
+    @required this.categoryId,
+    @required this.productId,
   }) : super(key: key);
 
-  final Item item;
+  Item item;
+  final String categoryId;
+  final String productId;
 
   Future<List<ReviewModal>> loadDataReview() async {
+    item = await DatabaseService().getItemWithProductId(categoryId, productId);
     List<ReviewModal> result = [];
     result = await DatabaseService()
         .getReviewModalFromFirestore(item.categoryId, item.productId);
@@ -195,10 +199,13 @@ class DetailsScreen extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.only(left: 20.0),
-                child: Text('Details', style: TextStyle(fontSize: 24.0)),
+                child: Text(
+                  'Details',
+                  style: TextStyle(fontSize: 24.0)
+                ),
               ),
               SizedBox(
-                height: 5.0
+                height: 5.0,
               ),
               Padding(
                 padding: EdgeInsets.only(left: 20.0, right: 10.0),
@@ -206,12 +213,12 @@ class DetailsScreen extends StatelessWidget {
                   item.description,
                   style: TextStyle(
                     fontSize: 18.0,
-                    color: Colors.black38,
+                    color: Colors.black38
                   ),
                 ),
               ),
               SizedBox(
-                height: 40.0,
+                height: 40.0
               ),
               Row(
                 children: [
@@ -286,7 +293,10 @@ class DetailsScreen extends StatelessWidget {
                         );
                       },
                       separatorBuilder: (context, index) {
-                        return Divider(thickness: 2.0, color: kDarkColor);
+                        return Divider(
+                          thickness: 2.0,
+                          color: kDarkColor,
+                        );
                       },
                     )
                   : Container(
@@ -368,13 +378,17 @@ class DetailsScreen extends StatelessWidget {
                       child: Text(
                         item.color,
                         style: TextStyle(
-                            fontSize: 16.0, fontWeight: FontWeight.bold),
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 50.0),
+              SizedBox(
+                height: 50.0,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -427,7 +441,6 @@ class DetailsScreen extends StatelessWidget {
                           size: 30.0,
                         ),
                         onPressed: () {
-                          DataAddToCart.item = item;
                           _settingModalBottomSheet(context);
                         },
                       )),

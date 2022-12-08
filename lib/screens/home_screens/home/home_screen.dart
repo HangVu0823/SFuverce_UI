@@ -7,7 +7,6 @@ import 'package:sfuverce_app/screens/home_screens/home/widgets_home/header.dart'
 import 'package:sfuverce_app/screens/home_screens/home/widgets_home/image_card.dart';
 import 'package:sfuverce_app/screens/home_screens/home/widgets_home/promo_card.dart';
 import 'package:sfuverce_app/screens/home_screens/home/widgets_home/section.dart';
-import 'package:sfuverce_app/widgets/app_bottom_navigation.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key key}) : super(key: key);

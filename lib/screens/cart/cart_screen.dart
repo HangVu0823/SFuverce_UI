@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sfuverce_app/models/models_cart/cart.dart';
 import 'package:sfuverce_app/models/models_cart/user.dart';
@@ -38,6 +37,12 @@ class _CartScreenState extends State<CartScreen> {
     });
   }
 
+  void _delete() {
+    setState(() {
+      build(context);
+    });
+  }
+
   _buildCartItem(Cart cart) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
@@ -57,24 +62,24 @@ class _CartScreenState extends State<CartScreen> {
                 color: Colors.white,
                 onPressed: () {
                   FutureBuilder(
-                    future: DatabaseService().deleteItemCartFromFirestore(cart),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasError) {
-                        print("Loi cmnr ${snapshot.error}");
-                      }
-                      if (snapshot.connectionState == ConnectionState.done) {
-                        Fluttertoast.showToast(
-                            msg: "Add to cart successfully",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.CENTER_RIGHT,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: Colors.white,
-                            textColor: Colors.black,
-                            fontSize: 16.0);
-                      }
-                      return Center(child: CircularProgressIndicator());
-                    },
-                  );
+                      future:
+                          DatabaseService().deleteItemCartFromFirestore(cart),
+                      builder: (context, AsyncSnapshot<void> snapshot) {
+                        print("object");
+                        //   if (snapshot.hasError) {
+                        //     print("Loi cmnr ${snapshot.error}");
+                        //   }
+                        //   if (snapshot.connectionState == ConnectionState.done) {
+                        //     print("Helloooooooooooo");
+                        //   }
+                        //   return Center(child: CircularProgressIndicator());
+                        // setState(() {
+                        //   _buildCartItem(cart);
+                        // });
+                      });
+                  setState(() {
+                    _buildCartItem(cart);
+                  });
                 },
               ),
             ),
@@ -254,10 +259,10 @@ class _CartScreenState extends State<CartScreen> {
           }
           final currentUser = UserCart(
               name: FirebaseAuth.instance.currentUser.email, cart: listCart);
-          int productPrice = 0;
-          currentUser.cart.forEach((Cart cart) => productPrice +=
-              (cart.quantity * cart.itemCart.originalPrice) as int);
-          int totalPrice = productPrice;
+          double productPrice = 0;
+          currentUser.cart.forEach((Cart cart) =>
+              productPrice += (cart.quantity * cart.itemCart.originalPrice));
+          double totalPrice = productPrice;
 
           return buildItem(context, currentUser, productPrice, totalPrice);
         }
@@ -266,8 +271,8 @@ class _CartScreenState extends State<CartScreen> {
     );
   }
 
-  Scaffold buildItem(
-      BuildContext context, currentUser, int productPrice, int totalPrice) {
+  Scaffold buildItem(BuildContext context, currentUser, double productPrice,
+      double totalPrice) {
     int deliveryPrice = currentUser.cart.isEmpty ? 0 : 20;
     totalPrice += deliveryPrice;
     return Scaffold(
@@ -280,7 +285,9 @@ class _CartScreenState extends State<CartScreen> {
             color: Colors.black,
           ),
           iconSize: 30.0,
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            if (Navigator.canPop(context)) Navigator.pop(context);
+          },
         ),
         title: Text(
           'Your Cart',
@@ -358,7 +365,7 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                   ),
                   Text(
-                    deliveryPrice.toString(),
+                    '\$${deliveryPrice.toString()}',
                     style: TextStyle(color: Colors.black, fontSize: 20.0),
                   )
                 ],

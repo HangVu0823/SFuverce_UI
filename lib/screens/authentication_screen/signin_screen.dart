@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sfuverce_app/const/AppColors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sfuverce_app/screens/authentication_screen/signup_screen.dart';
 import 'package:sfuverce_app/screens/authentication_screen/widget/customButton.dart';
@@ -44,30 +45,51 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.deep_orange,
-      body: SafeArea(
+      backgroundColor: Color.fromARGB(255, 49, 60, 153),
+      body: Center(
         child: Column(
           children: [
-            Container(
-              padding: EdgeInsets.only(left: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  IconButton(
-                    onPressed: null,
-                    icon: Icon(
-                      Icons.light,
-                      color: Colors.transparent,
+            SizedBox(
+              // height: 150,
+              // width: 100,
+              child: Padding(
+                padding: EdgeInsets.only(left: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    IconButton(
+                      onPressed: null,
+                      icon: Icon(
+                        Icons.light,
+                        color: Colors.transparent,
+                      ),
                     ),
-                  ),
-                  Text(
-                    "Sign In",
-                    style: TextStyle(fontSize: 22, color: Colors.white),
-                  ),
-                ],
+                    Text(
+                      "Sign In",
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w800,
+                        color: Colors.white,
+                        shadows: <Shadow>[
+                          // Shadow(
+                          //   offset: Offset(5.0, 5.0),
+                          //   blurRadius: 8.0,
+                          //   color: Color.fromARGB(123, 74, 95, 202),
+                          // ),
+                          Shadow(
+                            offset: Offset(2.0, 2.0),
+                            blurRadius: 8.0,
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
+            SizedBox(height: 10),
             Expanded(
               child: Container(
                 //width: 100,
@@ -91,7 +113,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         Text(
                           "Welcome Back",
                           style: TextStyle(
-                              fontSize: 22, color: AppColors.deep_orange),
+                              fontWeight: FontWeight.w600,
+                              fontSize: 22,
+                              color: Color.fromARGB(255, 49, 60, 153)),
                         ),
                         Text(
                           "Glad to see you back my buddy.",
@@ -109,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               height: 48,
                               width: 41,
                               decoration: BoxDecoration(
-                                  color: AppColors.deep_orange,
+                                  color: Color.fromARGB(255, 103, 140, 196),
                                   borderRadius: BorderRadius.circular(12)),
                               child: Center(
                                 child: Icon(
@@ -134,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   labelText: 'EMAIL',
                                   labelStyle: TextStyle(
                                     fontSize: 15,
-                                    color: AppColors.deep_orange,
+                                    color: Color.fromARGB(255, 103, 140, 196),
                                   ),
                                 ),
                               ),
@@ -150,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               height: 48,
                               width: 41,
                               decoration: BoxDecoration(
-                                  color: AppColors.deep_orange,
+                                  color: Color.fromARGB(255, 103, 140, 196),
                                   borderRadius: BorderRadius.circular(12)),
                               child: Center(
                                 child: Icon(
@@ -176,7 +200,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   labelText: 'PASSWORD',
                                   labelStyle: TextStyle(
                                     fontSize: 15,
-                                    color: AppColors.deep_orange,
+                                    color: Color.fromARGB(255, 103, 140, 196),
                                   ),
                                   suffixIcon: _obscureText == true
                                       ? IconButton(
@@ -208,13 +232,32 @@ class _LoginScreenState extends State<LoginScreen> {
                         SizedBox(
                           height: 50,
                         ),
-                        // elevated button
-                        customButton(
-                          "Sign In",
-                          () {
-                            signIn();
-                          },
+
+                        SizedBox(
+                          // width: 1,
+                          // height: 56,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              signIn();
+                            },
+                            child: Text(
+                              "Sign In",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 18),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              primary: Color.fromARGB(255, 103, 140, 196),
+                              elevation: 3,
+                            ),
+                          ),
                         ),
+                        // elevated button
+                        // customButton(
+                        //   "Sign In",
+                        //   () {
+                        //     signIn();
+                        //   },
+                        // ),
                         SizedBox(
                           height: 20,
                         ),
@@ -234,7 +277,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 style: TextStyle(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w600,
-                                  color: AppColors.deep_orange,
+                                  color: Color.fromARGB(255, 49, 60, 153),
                                 ),
                               ),
                               onTap: () {

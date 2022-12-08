@@ -43,7 +43,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.deep_orange,
+      backgroundColor: Color.fromARGB(255, 49, 60, 153),
       body: SafeArea(
         child: Column(
           children: [
@@ -64,7 +64,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     ),
                     Text(
                       "Sign Up",
-                      style: TextStyle(fontSize: 22, color: Colors.white),
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w800,
+                        color: Colors.white,
+                        shadows: <Shadow>[
+                          // Shadow(
+                          //   offset: Offset(5.0, 5.0),
+                          //   blurRadius: 8.0,
+                          //   color: Color.fromARGB(123, 74, 95, 202),
+                          // ),
+                          Shadow(
+                            offset: Offset(2.0, 2.0),
+                            blurRadius: 8.0,
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -93,7 +109,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         Text(
                           "Welcome Buddy!",
                           style: TextStyle(
-                              fontSize: 22, color: AppColors.deep_orange),
+                              fontWeight: FontWeight.w600,
+                              fontSize: 22,
+                              color: Color.fromARGB(255, 49, 60, 153)),
                         ),
                         Text(
                           "Glad to see you back my buddy.",
@@ -111,7 +129,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               height: 48,
                               width: 41,
                               decoration: BoxDecoration(
-                                  color: AppColors.deep_orange,
+                                  color: Color.fromARGB(255, 103, 140, 196),
                                   borderRadius: BorderRadius.circular(12)),
                               child: Center(
                                 child: Icon(
@@ -136,7 +154,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   labelText: 'EMAIL',
                                   labelStyle: TextStyle(
                                     fontSize: 15,
-                                    color: AppColors.deep_orange,
+                                    color: Color.fromARGB(255, 103, 140, 196),
                                   ),
                                 ),
                               ),
@@ -152,7 +170,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               height: 48,
                               width: 41,
                               decoration: BoxDecoration(
-                                  color: AppColors.deep_orange,
+                                  color: Color.fromARGB(255, 103, 140, 196),
                                   borderRadius: BorderRadius.circular(12)),
                               child: Center(
                                 child: Icon(
@@ -178,7 +196,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   labelText: 'PASSWORD',
                                   labelStyle: TextStyle(
                                     fontSize: 15,
-                                    color: AppColors.deep_orange,
+                                    color: Color.fromARGB(255, 103, 140, 196),
                                   ),
                                   suffixIcon: _obscureText == true
                                       ? IconButton(
@@ -208,8 +226,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         ),
 
                         SizedBox(
-                            //height: 50,
-                            ),
+                          height: 50,
+                        ),
                         // elevated button
                         SizedBox(
                           // width: 1,
@@ -224,18 +242,18 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   TextStyle(color: Colors.white, fontSize: 18),
                             ),
                             style: ElevatedButton.styleFrom(
-                              primary: Color.fromRGBO(63, 81, 181, 0.9),
+                              primary: Color.fromARGB(255, 103, 140, 196),
                               elevation: 3,
                             ),
                           ),
                         ),
                         SizedBox(
-                            // height: 20,
-                            ),
+                          height: 20,
+                        ),
                         Wrap(
                           children: [
                             Text(
-                              "Don't have an account?",
+                              "Already a member?",
                               style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w600,
@@ -246,9 +264,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               child: Text(
                                 " Sign In",
                                 style: TextStyle(
-                                  fontSize: 16,
+                                  fontSize: 13,
                                   fontWeight: FontWeight.w600,
-                                  color: AppColors.deep_orange,
+                                  color: Color.fromARGB(255, 49, 60, 153),
                                 ),
                               ),
                               onTap: () {

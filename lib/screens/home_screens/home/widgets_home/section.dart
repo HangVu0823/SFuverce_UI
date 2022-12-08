@@ -24,29 +24,6 @@ class Section extends StatelessWidget {
                 title,
                 style: TextStyle(fontSize: 20.0, height: 1),
               ),
-              InkWell(
-                child: Wrap(
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  children: [
-                    Text(
-                      'View all',
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        height: 1,
-                        color: primaryColor,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10.0),
-                      child: Icon(
-                        Icons.arrow_forward,
-                        color: primaryColor,
-                      ),
-                    ),
-                  ],
-                ),
-                onTap: () {},
-              )
             ],
           ),
         ),

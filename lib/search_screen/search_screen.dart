@@ -1,17 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/route_manager.dart';
-import 'package:sfuverce_app/models/item.dart';
-import 'package:sfuverce_app/screens/cart/details_screen.dart';
-import 'package:sfuverce_app/screens/home_screens/category/category_screen.dart';
-import 'package:sfuverce_app/screens/home_screens/category/widgets_category/furniture_grid_item.dart';
-import 'package:sfuverce_app/screens/home_screens/home/widgets_home/category_card.dart';
-import 'package:sfuverce_app/screens/home_screens/home/widgets_home/search_bar.dart';
+import 'package:sfuverce_app/search_screen/search_detail.dart';
 
 class SearchSreen extends StatefulWidget {
   const SearchSreen({Key key}) : super(key: key);
@@ -22,7 +13,6 @@ class SearchSreen extends StatefulWidget {
 
 class _SearchSreenState extends State<SearchSreen> {
   var inputText = "";
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,12 +41,20 @@ class _SearchSreenState extends State<SearchSreen> {
             Expanded(
                 child: Container(
               child: StreamBuilder(
-                  stream: FirebaseFirestore.instance
-                      .collection("/Categories/E4dhADZRkTTWH6bHPsRt/Products")
-                      .where("name", isGreaterThanOrEqualTo: inputText)
-                      .snapshots(),
+                  stream: (inputText != "" && inputText != null)
+                      ? FirebaseFirestore.instance
+                          .collectionGroup("Products")
+                          // .where("name", isEqualTo: inputText)
+                          // .where("name", isLessThan: inputText)
+
+                          .where("name", isGreaterThanOrEqualTo: inputText)
+                          .snapshots()
+                      : FirebaseFirestore.instance
+                          .collectionGroup("Products")
+                          .snapshots(),
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot> snapshot) {
+                    //print("A");
                     if (snapshot.hasError) {
                       return Center(
                         child: Text("Something went wrong"),
@@ -80,18 +78,27 @@ class _SearchSreenState extends State<SearchSreen> {
                       return Card(
                           elevation: 10,
                           child: InkWell(
-                            // onTap: () => Navigator.push(
-                            //   context,
-                            //   CupertinoPageRoute(
-                            //       builder: (_) =>
-                            //           DetailsScreen(item: Item, margin: Margi)),
-                            // ),
-                            onTap: () => {
-                              print("a"),
+                            onTap: (){
+                              return Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                    builder: (_) => SearchDetailProduct(
+                                          // categoryId: "3YMCXDQiaBXjtAyI0B1l"
+                                          categoryId: document
+                                              .reference.parent.parent.id,
+                                          productId: document.id.toString(),
+                                          // productId: document.i,
+                                        )),
+                              );
+                              //print(document.reference.parent.parent.id);
+                              //print(data['categoryid']);
                             },
                             child: ListTile(
                               title: Text(data['name']),
-                              leading: Image.asset("${data['imagePath']}"),
+                              //print(Text(data['name']));
+                              //     String array[""] = data['name'];
+                              // leading: Image.asset("${data['imagePath']}"),
+                              // var list = [for (var e in map.entries) FooClass(e.key, e.value)];
                             ),
                           ));
                     }).toList());

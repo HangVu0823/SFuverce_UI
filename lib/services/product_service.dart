@@ -8,6 +8,7 @@ import '../models/item.dart';
 import '../models/models_cart/cart.dart';
 import '../models/models_cart/item_cart.dart';
 import '../models/models_review/ReviewModal.dart';
+import '../screens/cart/cart_screen.dart';
 import '../screens/reviews/reviews.dart';
 
 mixin ProductService {
@@ -22,7 +23,6 @@ mixin ProductService {
         if (doc.exists) {
           Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
           Item a = Item.fromJson(data, doc.id, categoryId);
-
           return a;
         }
         return Item();
@@ -42,6 +42,25 @@ mixin ProductService {
         .then((value) {
       Fluttertoast.showToast(
           msg: "Add to cart successfully",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER_RIGHT,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.white,
+          textColor: Colors.black,
+          fontSize: 16.0);
+    });
+  }
+
+  Future<void> deleteItemCartFromFirestore(Cart cart) async {
+    _db
+        .collection('users-form-data')
+        .doc(FirebaseAuth.instance.currentUser.email)
+        .collection('cart')
+        .doc(cart.itemCart.productId)
+        .delete()
+        .then((value) {
+      Fluttertoast.showToast(
+          msg: " Delete product successfully",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER_RIGHT,
           timeInSecForIosWeb: 1,
@@ -73,7 +92,8 @@ mixin ProductService {
 
   Future<List<ItemCart>> getItemCartFromFirestore() async {
     //print("hi3");
-    CollectionReference collection = _db.collection('users-form-data')
+    CollectionReference collection = _db
+        .collection('users-form-data')
         .doc(FirebaseAuth.instance.currentUser.email)
         .collection('cart');
     List<ItemCart> itemCart;
@@ -81,7 +101,7 @@ mixin ProductService {
       itemCart = querySnapshot.docs.map((doc) {
         //print("hello ban loi ban co o day khong");
         if (doc.exists) {
-           Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+          Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
           ItemCart a = ItemCart.fromJson(data);
           //print("aaaa $a");
           return a;
@@ -92,12 +112,21 @@ mixin ProductService {
     return itemCart;
   }
 
-  Future<void> deleteItemCartFromFirestore(Cart cart) async {
-    //print("hi3");
-    _db.collection('users-form-data')
-        .doc(FirebaseAuth.instance.currentUser.email)
-        .collection('cart').doc(cart.itemCart.productId).delete();
-       
+  Future<Item> getItemWithProductId(String categoryId, String productId) async {
+    DocumentReference documentReference = _db
+        .collection('Categories')
+        .doc(categoryId)
+        .collection('Products')
+        .doc(productId);
+    // print("Hi1 $categoryId");
+    Item item;
+    await documentReference.get().then((DocumentSnapshot doc) {
+      if (doc.exists) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        item = Item.fromJson(data, productId, categoryId);
+      }
+    });
+    return item;
   }
 
   Future<List<ReviewModal>> getReviewModalFromFirestore(
