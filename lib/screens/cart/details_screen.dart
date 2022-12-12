@@ -10,6 +10,7 @@ import 'package:sfuverce_app/screens/reviews/reviewsUI.dart';
 import 'package:sfuverce_app/services/database_service.dart';
 
 import '../../models/models_review/ReviewModal.dart';
+import '../user_profile/favorites/favorites_screen.dart';
 
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({
@@ -452,25 +453,37 @@ class DetailsScreen extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    height: 60.0,
-                    width: 60.0,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.0),
-                        color: Theme.of(context).primaryColor,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black12,
-                            offset: Offset(0, 2),
-                            blurRadius: 20.0,
-                          )
-                        ]),
-                    child: Center(
-                        child: Icon(
-                      Icons.favorite_border,
-                      color: Colors.white,
-                      size: 30.0,
-                    )),
-                  ),
+                      height: 60.0,
+                      width: 60.0,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20.0),
+                          color: Theme.of(context).primaryColor,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12,
+                              offset: Offset(0, 2),
+                              blurRadius: 20.0,
+                            )
+                          ]),
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.favorite_border,
+                          color: Colors.white,
+                          size: 30.0,
+                        ),
+                        onPressed: () {
+                          DataAddFavorites.item = item;
+                          FutureBuilder(
+                            future: DatabaseService().addFavoriteToCart(),
+                            builder: (context, AsyncSnapshot<void> snapshot) {
+                              if (snapshot.hasError) {
+                                print(snapshot.error);
+                              }
+                            },
+                          );
+                          // DataAddToCart.item = item;
+                        },
+                      )),
                 ],
               )
             ],

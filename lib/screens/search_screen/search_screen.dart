@@ -2,7 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sfuverce_app/search_screen/search_detail.dart';
+import 'package:sfuverce_app/screens/home_screens/home/home_screen.dart';
+import 'package:sfuverce_app/screens/search_screen/search_detail.dart';
 
 class SearchSreen extends StatefulWidget {
   const SearchSreen({Key key}) : super(key: key);
@@ -38,6 +39,14 @@ class _SearchSreenState extends State<SearchSreen> {
                 border: InputBorder.none,
               ),
             ),
+            IconButton(
+              onPressed: () => Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => HomeScreen())),
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black,
+              ),
+            ),
             Expanded(
                 child: Container(
               child: StreamBuilder(
@@ -62,13 +71,10 @@ class _SearchSreenState extends State<SearchSreen> {
                     }
 
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      // print(snapshot.data);
-
                       return Center(
                         child: Text("Loading"),
                       );
                     }
-
                     return ListView(
                         children:
                             snapshot.data.docs.map((DocumentSnapshot document) {
@@ -78,7 +84,7 @@ class _SearchSreenState extends State<SearchSreen> {
                       return Card(
                           elevation: 10,
                           child: InkWell(
-                            onTap: (){
+                            onTap: () {
                               return Navigator.push(
                                 context,
                                 CupertinoPageRoute(
@@ -90,15 +96,9 @@ class _SearchSreenState extends State<SearchSreen> {
                                           // productId: document.i,
                                         )),
                               );
-                              //print(document.reference.parent.parent.id);
-                              //print(data['categoryid']);
                             },
                             child: ListTile(
                               title: Text(data['name']),
-                              //print(Text(data['name']));
-                              //     String array[""] = data['name'];
-                              // leading: Image.asset("${data['imagePath']}"),
-                              // var list = [for (var e in map.entries) FooClass(e.key, e.value)];
                             ),
                           ));
                     }).toList());

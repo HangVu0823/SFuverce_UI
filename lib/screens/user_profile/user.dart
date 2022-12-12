@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:sfuverce_app/screens/delivery/trackorder.dart';
+import 'package:sfuverce_app/screens/user_profile/favorites/favorites_screen.dart';
 import 'package:sfuverce_app/screens/user_profile/setting/setting.dart';
 
-class StatsScreen extends StatefulWidget {
-  _StatsScreenState createState() => _StatsScreenState();
+class UserScreen extends StatefulWidget {
+  _UserScreenState createState() => _UserScreenState();
 }
 
-class _StatsScreenState extends State<StatsScreen> {
+class _UserScreenState extends State<UserScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,13 +73,13 @@ class _StatsScreenState extends State<StatsScreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text('Pino',
+                              Text('Pino', //name
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontFamily: 'Quicksand',
                                       fontSize: 24.0,
                                       fontWeight: FontWeight.bold)),
-                              Text('176***590',
+                              Text('176***590', //email
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontFamily: 'Quicksand',
@@ -112,8 +113,17 @@ class _StatsScreenState extends State<StatsScreen> {
                         children: <Widget>[
                           Column(
                             children: <Widget>[
-                              Icon(Icons.perm_contact_calendar,
-                                  color: Colors.white, size: 35.0),
+                              IconButton(
+                                icon: Icon(Icons.favorite),
+                                color: Colors.white,
+                                iconSize: 35.0,
+                                onPressed: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => FavoriteScreen(),
+                                  ),
+                                ),
+                              ),
                               SizedBox(
                                 height: 5.0,
                               ),
@@ -208,16 +218,13 @@ class _StatsScreenState extends State<StatsScreen> {
                     child: customCards(
                         'To be received', '8', 'assets/images/user/trucks.png'),
                     onTap: () {
-                      Navigator.pop(context);
+                      //Navigator.pop(context);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => TrackOrder()));
                     },
                   ),
-                  // GestureDetector(
-                  //   onTap: () => TrackOrder(),
-                  // ),
                   customCards('Return/replace', '0',
                       'assets/images/user/returnbox.png'),
                 ],

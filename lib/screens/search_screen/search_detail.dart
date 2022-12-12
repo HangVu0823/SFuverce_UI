@@ -7,10 +7,7 @@ import 'package:sfuverce_app/screens/chat/chat_products/chat_detailsScreen.dart'
 import 'package:sfuverce_app/screens/reviews/reviews.dart';
 import 'package:sfuverce_app/screens/reviews/reviewsUI.dart';
 import 'package:sfuverce_app/services/database_service.dart';
-
-import '../../models/models_review/ReviewModal.dart';
-import '../screens/cart/details_screen.dart';
-import '../screens/cart/option_modal_addCart.dart';
+import '../cart/details_screen.dart';
 
 class SearchDetailProduct extends StatelessWidget {
   SearchDetailProduct({
@@ -42,7 +39,9 @@ class SearchDetailProduct extends StatelessWidget {
           }
           if (snapshot.connectionState == ConnectionState.done) {
             // print(snapshot.data.length);
-            return DetailsScreen(item: snapshot.data,);
+            return DetailsScreen(
+              item: snapshot.data,
+            );
           }
           return Center(child: CircularProgressIndicator());
         });

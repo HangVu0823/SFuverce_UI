@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:sfuverce_app/search_screen/search_screen.dart';
+import 'package:sfuverce_app/screens/search_screen/search_screen.dart';
 
 class SearchBar extends StatelessWidget {
   @override
