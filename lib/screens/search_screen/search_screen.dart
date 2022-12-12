@@ -22,6 +22,17 @@ class _SearchSreenState extends State<SearchSreen> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
+            // Row(
+            //   children: [
+            //     IconButton(
+            //       icon: Icon(
+            //         Icons.arrow_back_ios,
+            //         color: Colors.black,
+            //       ),
+            //       onPressed: () {
+            //         if (Navigator.canPop(context)) Navigator.pop(context);
+            //       },
+            //     ),
             TextFormField(
               onChanged: (value) {
                 setState(() {
@@ -39,14 +50,8 @@ class _SearchSreenState extends State<SearchSreen> {
                 border: InputBorder.none,
               ),
             ),
-            IconButton(
-              onPressed: () => Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => HomeScreen())),
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: Colors.black,
-              ),
-            ),
+            //   ],
+            // ),
             Expanded(
                 child: Container(
               child: StreamBuilder(

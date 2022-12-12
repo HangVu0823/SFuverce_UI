@@ -236,3 +236,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
 class DataAddFavorites {
   static Item item;
 }
+
+class NameAccount{
+  
+}

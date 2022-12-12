@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sfuverce_app/screens/delivery/trackorder.dart';
 import 'package:sfuverce_app/screens/user_profile/favorites/favorites_screen.dart';
 import 'package:sfuverce_app/screens/user_profile/setting/setting.dart';
+import 'package:sfuverce_app/services/database_service.dart';
 
 class UserScreen extends StatefulWidget {
   _UserScreenState createState() => _UserScreenState();
@@ -73,22 +75,41 @@ class _UserScreenState extends State<UserScreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text('Pino', //name
+                              FutureBuilder(
+                                  future: DatabaseService()
+                                      .getNameUserFromFirestore(),
+                                  builder: (context,
+                                      AsyncSnapshot<String> snapshot) {
+                                    if (snapshot.hasError) {
+                                      print(
+                                          "Error read username: ${snapshot.error}");
+                                    }
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.done) {
+                                      return Text(snapshot.data, //name
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontFamily: 'Quicksand',
+                                              fontSize: 24.0,
+                                              fontWeight: FontWeight.bold));
+                                    }
+                                    return Text('User', //name
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'Quicksand',
+                                            fontSize: 24.0,
+                                            fontWeight: FontWeight.bold));
+                                  }),
+                              Text(
+                                  FirebaseAuth
+                                      .instance.currentUser.email, //email
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontFamily: 'Quicksand',
-                                      fontSize: 24.0,
-                                      fontWeight: FontWeight.bold)),
-                              Text('176***590', //email
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: 'Quicksand',
-                                      fontSize: 20.0))
+                                      fontSize: 15.0))
                             ],
                           ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width - 250.0,
-                          ),
+                          Spacer(),
                           IconButton(
                               icon: Icon(
                                 Icons.settings,

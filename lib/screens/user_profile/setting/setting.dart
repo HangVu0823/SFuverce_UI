@@ -15,6 +15,7 @@ class SettingsOnePage extends StatelessWidget {
           'Settings',
           style: TextStyle(color: Colors.black),
         ),
+        
       ),
       body: Column(
         children: [
