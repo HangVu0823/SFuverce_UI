@@ -125,7 +125,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
                                     image: AssetImage(
-                                        'assets/images/user/user_avatar/avt.png'),
+                                        'assets/images/user/user_avatar/avatar.png'),
                                   )),
                             ),
                           )

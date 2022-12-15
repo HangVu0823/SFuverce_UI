@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sfuverce_app/constants/colors.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sfuverce_app/screens/home_screens/category/widgets_category/color_list.dart';
@@ -143,9 +144,18 @@ class _OptionModalBottomSheetState extends State<OptionModal_AddCart> {
             ),
             InkWell(
               onTap: () {
+                if (quality <= 0) {
+                  Fluttertoast.showToast(
+                      msg: "Number of products must be greater than 0",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.CENTER_RIGHT,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.white,
+                      textColor: Colors.black,
+                      fontSize: 16.0);
+                  return;
+                }
                 DataAddToCart.number = quality;
-
-                // print("object");
                 FutureBuilder(
                   future: DatabaseService().addItemToCart(),
                   builder: (context, AsyncSnapshot<void> snapshot) {

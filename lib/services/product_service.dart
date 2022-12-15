@@ -9,6 +9,8 @@ import '../models/item.dart';
 import '../models/models_cart/cart.dart';
 import '../models/models_cart/item_cart.dart';
 import '../models/models_favorites/favorites.dart';
+import '../models/models_order/item_order.dart';
+import '../models/models_order/order_information.dart';
 import '../models/models_review/ReviewModal.dart';
 import '../screens/cart/cart_screen.dart';
 import '../screens/reviews/reviews.dart';
@@ -52,6 +54,17 @@ mixin ProductService {
           textColor: Colors.black,
           fontSize: 16.0);
     });
+  }
+
+  Future<void> deleteItemToCart() async {
+    CollectionReference collectionReference = _db
+        .collection('users-form-data')
+        .doc(FirebaseAuth.instance.currentUser.email)
+        .collection('cart');
+    var snapshots = await collectionReference.get();
+    for (var doc in snapshots.docs) {
+      await doc.reference.delete();
+    }
   }
 
   Future<void> deleteItemCartFromFirestore(Cart cart) async {
@@ -214,5 +227,38 @@ mixin ProductService {
           textColor: Colors.black,
           fontSize: 16.0);
     });
+  }
+
+  Future<OrderInformation> getOrderWithId(String id) async {
+    DocumentReference documentReference = _db.collection('Order').doc(id);
+    // print("Hi1 $categoryId");
+    OrderInformation order;
+    await documentReference.get().then((DocumentSnapshot doc) {
+      if (doc.exists) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        order = OrderInformation.fromJson(data);
+      }
+    });
+    return order;
+  }
+
+  Future<List<ItemOrder>> getItemOrderWithId(String id) async {
+    CollectionReference collection =
+        _db.collection('Order').doc(id).collection('item');
+
+    List<ItemOrder> result;
+    await collection.get().then((QuerySnapshot querySnapshot) {
+      result = querySnapshot.docs.map((doc) {
+        //print("hello ban loi ban co o day khong");
+        if (doc.exists) {
+          Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+          ItemOrder a = ItemOrder.fromJson(data, doc.id);
+          //print("aaaa $a");
+          return a;
+        }
+        return ItemOrder();
+      }).toList();
+    });
+    return result;
   }
 }

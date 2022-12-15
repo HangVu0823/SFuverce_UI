@@ -21,10 +21,11 @@ class _UserScreenState extends State<UserScreen> {
   final user = FirebaseAuth.instance.currentUser;
   String name = 'User';
   String email = '********';
+  String urlPhoto = "null";
   String phone = '********';
   String address = '******';
 
-  Future _getDataFromDatabse() async {
+  Future<int> _getDataFromDatabse() async {
     await FirebaseFirestore.instance
         .collection("users-form-data")
         .doc(FirebaseAuth.instance.currentUser.email)
@@ -34,16 +35,21 @@ class _UserScreenState extends State<UserScreen> {
         setState(() {
           name = snapshot.data()["name"];
           //email = snapshot.data()["email"];
+          if (snapshot.data()["avatar"] == null)
+            urlPhoto = "null";
+          else
+            urlPhoto = snapshot.data()["avatar"];
           phone = snapshot.data()["phone"];
           address = snapshot.data()["address"];
         });
       }
     });
+    return 1;
   }
 
   void initState() {
     super.initState();
-    _getDataFromDatabse();
+    // _getDataFromDatabse();
   }
 
   @override
@@ -112,60 +118,110 @@ class _UserScreenState extends State<UserScreen> {
                       SizedBox(
                         height: 15.0,
                       ),
-                      Row(
-                        children: <Widget>[
-                          SizedBox(
-                            width: 10.0,
-                          ),
-                          Container(
-                            width: 75.0,
-                            height: 75.0,
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                    color: Colors.white,
-                                    style: BorderStyle.solid,
-                                    width: 2.0),
-                                image: DecorationImage(
-                                    image: AssetImage(
-                                        'assets/images/user/user_avatar/avatar.png'))),
-                          ),
-                          SizedBox(
-                            width: 10.0,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(name, //email
-                                  style: TextStyle(
+                      FutureBuilder(
+                          future: _getDataFromDatabse(),
+                          builder: (context, AsyncSnapshot<int> snapshot) {
+                            if (snapshot.hasError) {
+                              return Text(snapshot.error);
+                            }
+                            if (snapshot.hasData) {
+                              return Row(
+                                children: <Widget>[
+                                  SizedBox(
+                                    width: 10.0,
+                                  ),
+                                  CircleAvatar(
+                                    radius: 37,
+                                    backgroundImage: (urlPhoto == "null")
+                                        ? AssetImage(
+                                            'assets/images/user/user_avatar/avatar.png')
+                                        : NetworkImage(urlPhoto),
+                                  ),
+                                  SizedBox(
+                                    width: 10.0,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(name,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w700,
+                                              fontFamily: 'Quicksand',
+                                              fontSize: 21.0)),
+                                      Text(phone,
+                                          style: TextStyle(
+                                              color: Colors.grey[300],
+                                              fontFamily: 'Quicksand',
+                                              fontSize: 15.0))
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  IconButton(
+                                      icon: Icon(
+                                        Icons.settings,
+                                        color: Colors.white,
+                                        size: 30.0,
+                                      ),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    SettingsOnePage()));
+                                      }),
+                                ],
+                              );
+                            }
+                            return Row(
+                              children: <Widget>[
+                                SizedBox(
+                                  width: 10.0,
+                                ),
+                                CircleAvatar(
+                                  radius: 37,
+                                  backgroundImage: AssetImage(
+                                      'assets/images/user/user_avatar/avatar.png'),
+                                ),
+                                SizedBox(
+                                  width: 10.0,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text("User",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w700,
+                                            fontFamily: 'Quicksand',
+                                            fontSize: 21.0)),
+                                    Text("(+84)xxx.xxx.xxx",
+                                        style: TextStyle(
+                                            color: Colors.grey[300],
+                                            fontFamily: 'Quicksand',
+                                            fontSize: 15.0))
+                                  ],
+                                ),
+                                Spacer(),
+                                IconButton(
+                                    icon: Icon(
+                                      Icons.settings,
                                       color: Colors.white,
-                                      fontWeight: FontWeight.w700,
-                                      fontFamily: 'Quicksand',
-                                      fontSize: 21.0)),
-                              Text(phone, //email
-                                  style: TextStyle(
-                                      color: Colors.grey[300],
-                                      fontFamily: 'Quicksand',
-                                      fontSize: 15.0))
-                            ],
-                          ),
-                          Spacer(),
-                          IconButton(
-                              icon: Icon(
-                                Icons.settings,
-                                color: Colors.white,
-                                size: 30.0,
-                              ),
-                              onPressed: () {
-                                Navigator.pop(context);
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            SettingsOnePage()));
-                              }),
-                        ],
-                      ),
+                                      size: 30.0,
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  SettingsOnePage()));
+                                    }),
+                              ],
+                            );
+                          }),
                       SizedBox(
                         height: 25.0,
                       ),

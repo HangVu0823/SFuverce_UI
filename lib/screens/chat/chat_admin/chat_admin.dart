@@ -47,6 +47,7 @@ class _ChatAdminScreenState extends State<ChatAdminScreen> {
             iconSize: 30.0,
           )
         ],
+        automaticallyImplyLeading: false,
       ),
       backgroundColor: Colors.indigo,
       body: SafeArea(

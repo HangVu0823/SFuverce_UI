@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -6,6 +7,7 @@ import 'package:sfuverce_app/models/models_cart/cart.dart';
 import 'package:sfuverce_app/models/models_cart/user.dart';
 import 'package:sfuverce_app/services/database_service.dart';
 import '../../models/models_cart/item_cart.dart';
+import '../check_out/shipping_screen.dart';
 
 class CartScreen extends StatefulWidget {
   @override
@@ -403,15 +405,20 @@ class _CartScreenState extends State<CartScreen> {
                         blurRadius: 30.0,
                       )
                     ]),
-                child: Center(
-                  child: Text(
-                    'Check Out',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontSize: 24.0),
-                  ),
-                ),
+                child: TextButton(
+                    child: Text(
+                      'Check Out',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 24.0),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                              builder: (context) => ShippingDetails()));
+                    }),
               )
             ],
           ),

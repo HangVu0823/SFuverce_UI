@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:sfuverce_app/constants/colors.dart';
 import 'package:sfuverce_app/screens/chat/chat_admin/chat_admin.dart';
 import 'package:sfuverce_app/screens/delivery/trackorder.dart';
+import 'package:sfuverce_app/screens/order_screen/order_screen.dart';
 import 'package:sfuverce_app/screens/user_profile/user.dart';
 import 'package:sfuverce_app/screens/wallet/wallet.dart';
 
@@ -115,7 +116,7 @@ class _PageNavigationState extends State<PageNavigation> {
     switch (_selectedIndex) {
       case 1:
         {
-          res = TrackOrder();
+          res = OrderScreen();
           break;
         }
       case 2:
