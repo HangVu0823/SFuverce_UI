@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:sfuverce_app/constants/backend_SignIn_SignUp/strings.dart';
+import 'package:sfuverce_app/custom-icons/custom-icons.dart';
+import 'package:sfuverce_app/screens/user_profile/setting/edit_profile.dart';
+import 'package:sfuverce_app/widgets/app_bottom_navigation.dart';
+import 'package:sfuverce_app/screens/user_profile/user.dart';
 
 class SettingsOnePage extends StatelessWidget {
   static final String path = "lib/settings.dat";
@@ -7,15 +12,28 @@ class SettingsOnePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        elevation: 0,
-        brightness: Brightness.light,
-        iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.white,
+        leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.black,
+            ),
+            iconSize: 30.0,
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => UserScreen()));
+            }),
         title: Text(
-          'Settings',
-          style: TextStyle(color: Colors.black),
+          'Setting',
+          style: TextStyle(
+            color: Theme.of(context).primaryColor,
+            fontWeight: FontWeight.bold,
+            fontSize: 18.0,
+          ),
         ),
-        
+        centerTitle: true,
+        elevation: 0.0,
       ),
       body: Column(
         children: [
@@ -31,12 +49,16 @@ class SettingsOnePage extends StatelessWidget {
                 color: Color.fromARGB(255, 24, 79, 175),
                 child: ListTile(
                   onTap: () {
-                    //open edit pofile
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => EditProfilePage()),
+                    );
                   },
                   title: Text(
-                    "Pino",
+                    "Edit profile",
                     style: TextStyle(
                       color: Color.fromARGB(251, 255, 255, 255),
+                      fontSize: 20,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -80,15 +102,15 @@ class SettingsOnePage extends StatelessWidget {
                       //open forgot password
                     },
                   ),
-                  _buildDivider(),
-                  ListTile(
-                    leading: Icon(Icons.location_pin, color: Colors.indigo),
-                    title: Text("Change Address"),
-                    trailing: Icon(Icons.keyboard_arrow_right),
-                    onTap: () {
-                      //open change address
-                    },
-                  )
+                  // _buildDivider(),
+                  // ListTile(
+                  //   leading: Icon(Icons.location_pin, color: Colors.indigo),
+                  //   title: Text("Change Address"),
+                  //   trailing: Icon(Icons.keyboard_arrow_right),
+                  //   onTap: () {
+                  //     //open change address
+                  //   },
+                  // )
                 ]),
               ),
               const SizedBox(height: 20.0),

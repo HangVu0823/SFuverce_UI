@@ -1,18 +1,78 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sfuverce_app/constants/backend_SignIn_SignUp/firebase_consts.dart';
 import 'package:sfuverce_app/screens/delivery/trackorder.dart';
 import 'package:sfuverce_app/screens/user_profile/favorites/favorites_screen.dart';
 import 'package:sfuverce_app/screens/user_profile/setting/setting.dart';
-import 'package:sfuverce_app/services/database_service.dart';
+import 'package:sfuverce_app/custom-icons/custom-icons.dart';
+import 'package:sfuverce_app/widgets/app_bottom_navigation.dart';
+
+import '../../services/account_service.dart';
+import '../cart/cart_screen.dart';
+import '../../services/database_service.dart';
 
 class UserScreen extends StatefulWidget {
   _UserScreenState createState() => _UserScreenState();
 }
 
 class _UserScreenState extends State<UserScreen> {
+  final user = FirebaseAuth.instance.currentUser;
+  String name = 'User';
+  String email = '********';
+  String phone = '********';
+  String address = '******';
+
+  Future _getDataFromDatabse() async {
+    await FirebaseFirestore.instance
+        .collection("users-form-data")
+        .doc(FirebaseAuth.instance.currentUser.email)
+        .get()
+        .then((snapshot) async {
+      if (snapshot.exists) {
+        setState(() {
+          name = snapshot.data()["name"];
+          //email = snapshot.data()["email"];
+          phone = snapshot.data()["phone"];
+          address = snapshot.data()["address"];
+        });
+      }
+    });
+  }
+
+  void initState() {
+    super.initState();
+    _getDataFromDatabse();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.black,
+            ),
+            iconSize: 30.0,
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => PageNavigation()));
+            }),
+        title: Text(
+          'User Profile',
+          style: TextStyle(
+            color: Theme.of(context).primaryColor,
+            fontWeight: FontWeight.bold,
+            fontSize: 18.0,
+          ),
+        ),
+        centerTitle: true,
+        elevation: 0.0,
+      ),
       body: ListView(
         children: <Widget>[
           Column(
@@ -22,7 +82,7 @@ class _UserScreenState extends State<UserScreen> {
                   Container(
                     height: 250.0,
                     width: double.infinity,
-                    color: Colors.yellow[700],
+                    color: Color.fromARGB(255, 21, 65, 131),
                   ),
                   Positioned(
                     bottom: 50.0,
@@ -32,7 +92,8 @@ class _UserScreenState extends State<UserScreen> {
                       height: 400.0,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(200.0),
-                          color: Colors.yellow[400].withOpacity(0.5)),
+                          color: Color.fromARGB(255, 47, 98, 156)
+                              .withOpacity(0.5)),
                     ),
                   ),
                   Positioned(
@@ -43,7 +104,7 @@ class _UserScreenState extends State<UserScreen> {
                       height: 300.0,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(200.0),
-                          color: Colors.yellow[400].withOpacity(0.5)),
+                          color: Colors.blue[700].withOpacity(0.5)),
                     ),
                   ),
                   Column(
@@ -67,7 +128,7 @@ class _UserScreenState extends State<UserScreen> {
                                     width: 2.0),
                                 image: DecorationImage(
                                     image: AssetImage(
-                                        'assets/images/avatar.png'))),
+                                        'assets/images/user/user_avatar/avatar.png'))),
                           ),
                           SizedBox(
                             width: 10.0,
@@ -75,36 +136,15 @@ class _UserScreenState extends State<UserScreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              FutureBuilder(
-                                  future: DatabaseService()
-                                      .getNameUserFromFirestore(),
-                                  builder: (context,
-                                      AsyncSnapshot<String> snapshot) {
-                                    if (snapshot.hasError) {
-                                      print(
-                                          "Error read username: ${snapshot.error}");
-                                    }
-                                    if (snapshot.connectionState ==
-                                        ConnectionState.done) {
-                                      return Text(snapshot.data, //name
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontFamily: 'Quicksand',
-                                              fontSize: 24.0,
-                                              fontWeight: FontWeight.bold));
-                                    }
-                                    return Text('User', //name
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontFamily: 'Quicksand',
-                                            fontSize: 24.0,
-                                            fontWeight: FontWeight.bold));
-                                  }),
-                              Text(
-                                  FirebaseAuth
-                                      .instance.currentUser.email, //email
+                              Text(name, //email
                                   style: TextStyle(
-                                      color: Colors.black,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w700,
+                                      fontFamily: 'Quicksand',
+                                      fontSize: 21.0)),
+                              Text(phone, //email
+                                  style: TextStyle(
+                                      color: Colors.grey[300],
                                       fontFamily: 'Quicksand',
                                       fontSize: 15.0))
                             ],
@@ -135,16 +175,17 @@ class _UserScreenState extends State<UserScreen> {
                           Column(
                             children: <Widget>[
                               IconButton(
-                                icon: Icon(Icons.favorite),
-                                color: Colors.white,
-                                iconSize: 35.0,
-                                onPressed: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => FavoriteScreen(),
-                                  ),
-                                ),
-                              ),
+                                  icon: Icon(Icons.favorite),
+                                  color: Colors.white,
+                                  iconSize: 35.0,
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                FavoriteScreen()));
+                                  }),
                               SizedBox(
                                 height: 5.0,
                               ),
@@ -158,10 +199,11 @@ class _UserScreenState extends State<UserScreen> {
                           ),
                           Column(
                             children: <Widget>[
-                              Icon(
-                                Icons.account_balance_wallet,
+                              IconButton(
+                                icon: Icon(Icons.account_balance_wallet),
                                 color: Colors.white,
-                                size: 35.0,
+                                iconSize: 35.0,
+                                onPressed: () => null,
                               ),
                               SizedBox(
                                 height: 5.0,
@@ -176,8 +218,12 @@ class _UserScreenState extends State<UserScreen> {
                           ),
                           Column(
                             children: <Widget>[
-                              Icon(Icons.print,
-                                  color: Colors.white, size: 35.0),
+                              IconButton(
+                                icon: Icon(Icons.print),
+                                color: Colors.white,
+                                iconSize: 35.0,
+                                onPressed: () => null,
+                              ),
                               SizedBox(
                                 height: 5.0,
                               ),
@@ -191,8 +237,12 @@ class _UserScreenState extends State<UserScreen> {
                           ),
                           Column(
                             children: <Widget>[
-                              Icon(Icons.laptop,
-                                  color: Colors.white, size: 35.0),
+                              IconButton(
+                                icon: Icon(Icons.laptop),
+                                color: Colors.white,
+                                iconSize: 35.0,
+                                onPressed: () => null,
+                              ),
                               SizedBox(
                                 height: 5.0,
                               ),
@@ -239,13 +289,16 @@ class _UserScreenState extends State<UserScreen> {
                     child: customCards(
                         'To be received', '8', 'assets/images/user/trucks.png'),
                     onTap: () {
-                      //Navigator.pop(context);
+                      Navigator.pop(context);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => TrackOrder()));
                     },
                   ),
+                  // GestureDetector(
+                  //   onTap: () => TrackOrder(),
+                  // ),
                   customCards('Return/replace', '0',
                       'assets/images/user/returnbox.png'),
                 ],
